@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">简账</string>
+    <string name="nav_title">简、是一种态度</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="home_show_title">添加/编辑</string>
+    <string name="status">备注</string>
+    <string name="time">日期</string>
+    <string name="money">金额</string>
+    <string name="type">用途</string>
+    <string name="type_2">类型</string>
+    <string name="proportion">占比</string>
+    <string name="in">收入</string>
+    <string name="out">支出</string>
+    <string name="save">保存</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="success">保存成功</string>
+    <string name="error">保存失败</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="back">返回</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="buy">购物</string>
+    <string name="title_simple">月基本信息</string>
+    <string name="title_full">月详细信息</string>
+
+    <string name="money_hint">单位：人民币</string>
+    <string name="status_hint">比如：双11剁手</string>
+    <string name="type_hint">比如：购物</string>
+
+    <!--Type类型-->
+    <string name="type_buy">购物</string>
+    <string name="type_food">餐饮</string>
+    <string name="type_money">工资</string>
+    <string name="type_bus">交通</string>
+    <string name="type_other">其他</string>
+
+    <!--菜单-->
+    <string name="home">我的首页</string>
+    <string name="manager">账单查询</string>
+    <string name="setting">个人设置</string>
+    <string name="lock">加密设置</string>
+    <string name="backup">备份还原</string>
+    <string name="about">关于软件</string>
+
+    <!--加密设置-->
+    <string name="old_password">输入密码</string>
+    <string name="new_password">新的密码</string>
+    <string name="password">重复密码</string>
+
+    <string name="file_message">选择保存位置</string>
+    <string name="file_message_2">选择还原文件</string>
+    <string name="file_name">请输入文件名</string>
+
+    <string name="update_password">修改密码</string>
+    <string name="close_password">关闭密码</string>
+
+    <string name="add_type">类型编辑</string>
+    <string name="out_excel">数据导出</string>
+    <string name="theme">主题更换</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+</resources>

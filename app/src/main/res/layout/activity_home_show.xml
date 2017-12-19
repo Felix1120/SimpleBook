@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/home_show_shape"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="@string/home_show_title"
+        android:textColor="@color/write_2"
+        android:textSize="16dp"/>
+
+    <RadioGroup
+        android:id="@+id/rg_activity_home_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_out_activity_home_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:button="@drawable/radio_button_style"
+            android:text="  支出"
+            android:textColor="@color/write_2"/>
+
+        <RadioButton
+            android:id="@+id/radio_in_activity_home_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:button="@drawable/radio_button_style"
+            android:text="  收入"
+            android:textColor="@color/write_2"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:gravity="right"
+            android:textSize="15sp"
+            android:text="@string/type_2"
+            android:textColor="@color/write_2"/>
+
+        <EditText
+            android:id="@+id/et_type_activity_home_show"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/spinner_shape"
+            android:gravity="left"
+            android:padding="3dp"
+            android:editable="false"
+            android:drawableRight="@drawable/spinner_down"
+            android:singleLine="true"
+            android:text="@string/buy"
+            android:textColor="@color/green"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:gravity="right"
+            android:text="@string/time"
+            android:textSize="15sp"
+            android:textColor="@color/write_2"/>
+
+        <EditText
+            android:id="@+id/et_time_activity_home_show"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_shape"
+            android:gravity="left"
+            android:padding="3dp"
+            android:singleLine="true"
+            android:inputType="date"
+            android:textColor="@color/write_2"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:gravity="right"
+            android:text="@string/money"
+            android:textSize="15sp"
+            android:textColor="@color/write_2"/>
+
+        <EditText
+            android:id="@+id/et_money_activity_home_show"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_shape"
+            android:gravity="left"
+            android:padding="3dp"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:hint="@string/money_hint"
+            android:textColorHint="@color/write_tran"
+            android:textColor="@color/write_2"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:gravity="right"
+            android:text="@string/type"
+            android:textSize="15sp"
+            android:textColor="@color/write_2"/>
+
+        <EditText
+            android:id="@+id/et_status_activity_home_show"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_shape"
+            android:gravity="left"
+            android:padding="3dp"
+            android:singleLine="true"
+            android:hint="@string/status_hint"
+            android:textColorHint="@color/write_tran"
+            android:textColor="@color/write_2"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_ok_activity_home_show"
+            android:text="@string/save"
+            android:textColor="@color/write_2"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_ok_shape"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+
+        <Button
+            android:id="@+id/btn_cancel_activity_home_show"
+            android:textColor="@color/write_2"
+            android:text="@string/cancel"
+            android:background="@drawable/btn_cancel_shape"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+    </LinearLayout>
+</LinearLayout>

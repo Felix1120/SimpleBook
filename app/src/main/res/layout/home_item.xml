@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:layout_marginTop="6dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_time_home_item"
+        android:layout_width="match_parent"
+        android:text="2017.11.11"
+        android:gravity="center"
+        android:textColor="@color/transparent_black_3"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <RelativeLayout
+            android:padding="2dp"
+            android:id="@+id/ll_home_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/green">
+
+            <ImageView
+                android:id="@+id/img_left_home_item"
+                android:layout_marginLeft="30dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/img_right_home_item"
+                android:layout_marginRight="30dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_type_home_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="网购"
+                android:textColor="@color/write"/>
+
+            <TextView
+                android:layout_below="@+id/tv_type_home_item"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:id="@+id/tv_money_home_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="¥5000"
+                android:textColor="@color/write"/>
+
+            <TextView
+                android:layout_below="@+id/tv_money_home_item"
+                android:id="@+id/tv_status_home_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="备注"
+                android:textColor="@color/write"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

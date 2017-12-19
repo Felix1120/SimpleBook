@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/home_show_shape"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title_activity_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:textColor="@color/write_2"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_message_activity_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:textColor="@color/write_2"/>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_ok_activity_dialog"
+            android:textColor="@color/write_2"
+            android:layout_marginRight="20dp"
+            android:text="@string/ok"
+            android:background="@drawable/btn_ok_shape"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+
+        <Button
+            android:id="@+id/btn_cancel_activity_dialog"
+            android:textColor="@color/write_2"
+            android:background="@drawable/btn_cancel_shape"
+            android:text="@string/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+    </LinearLayout>
+</LinearLayout>

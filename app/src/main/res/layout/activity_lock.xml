@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/home_show_shape"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="@string/lock"
+        android:textColor="@color/write_2"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/et_old_password_lock_activity"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/et_shape"
+        android:gravity="center"
+        android:hint="@string/old_password"
+        android:inputType="textPassword"
+        android:padding="3dp"
+        android:singleLine="true"
+        android:textColor="@color/write_2"
+        android:textColorHint="@color/write_tran"
+        android:textSize="15sp" />
+
+
+    <EditText
+        android:id="@+id/et_new_password_lock_activity"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/et_shape"
+        android:gravity="center"
+        android:hint="@string/new_password"
+        android:inputType="textPassword"
+        android:padding="3dp"
+        android:singleLine="true"
+        android:textColor="@color/write_2"
+        android:textColorHint="@color/write_tran"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/et_password_lock_activity"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_shape"
+        android:gravity="center"
+        android:hint="@string/password"
+        android:padding="3dp"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:textColor="@color/write_2"
+        android:textColorHint="@color/write_tran"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_button_activity_lock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_ok_activity_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_ok_shape"
+            android:text="@string/ok"
+            android:textColor="@color/write_2" />
+
+        <Button
+            android:id="@+id/btn_cancel_activity_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/btn_cancel_shape"
+            android:text="@string/cancel"
+            android:textColor="@color/write_2" />
+    </LinearLayout>
+    <LinearLayout
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/btn_update_activity_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/btn_ok_shape"
+            android:text="@string/update_password"
+            android:textColor="@color/write_2" />
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_close_activity_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/btn_cancel_shape"
+            android:text="@string/close_password"
+            android:textColor="@color/write_2" />
+    </LinearLayout>
+</LinearLayout>
+

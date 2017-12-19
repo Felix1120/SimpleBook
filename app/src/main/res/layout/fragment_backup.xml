@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view_fragment_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioGroup
+            android:id="@+id/rg_fragment_backup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_backup_fragment_backup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:button="@drawable/radio_button_style_2"
+                android:text="  备份"
+                android:textColor="@color/transparent_black_3" />
+
+            <RadioButton
+                android:id="@+id/radio_restore_fragment_backup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:button="@drawable/radio_button_style_2"
+                android:text="  还原"
+                android:textColor="@color/transparent_black_3" />
+        </RadioGroup>
+
+        <LinearLayout
+
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:id="@+id/ll_backup_fragment_backup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rg_fragment_backup"
+            android:orientation="vertical">
+            <EditText
+                android:editable="false"
+                android:id="@+id/et_file_path_fragment_backup"
+                android:background="@drawable/et_shape_backup_black"
+                android:layout_width="match_parent"
+                android:text="@string/file_message"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textSize="15dp"
+                android:singleLine="true"
+                android:textColor="@color/write_2"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/et_file_name_fragment_backup"
+                android:background="@drawable/et_shape_backup"
+                android:layout_width="match_parent"
+                android:hint="@string/file_name"
+                android:gravity="center"
+                android:padding="3dp"
+                android:singleLine="true"
+                android:textSize="15dp"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_backup_fragment_backup"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_ok_shape"
+                android:text="@string/ok"
+                android:textColor="@color/write_2"
+                android:textSize="15dp"
+                android:layout_width="60dp"
+                android:layout_height="25dp" />
+            <ScrollView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_backup_message_fragment_backup"
+                    android:layout_width="match_parent"
+                    android:textSize="12sp"
+                    android:layout_height="wrap_content"/>
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/ll_restore_fragment_backup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/rg_fragment_backup"
+            android:orientation="vertical">
+            <EditText
+                android:editable="false"
+                android:id="@+id/et_file_path_restore_fragment_backup"
+                android:background="@drawable/et_shape_backup_black"
+                android:layout_width="match_parent"
+                android:text="@string/file_message_2"
+                android:gravity="center"
+                android:padding="3dp"
+                android:singleLine="true"
+                android:textSize="15dp"
+                android:textColor="@color/write_2"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_restore_fragment_backup"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_ok_shape"
+                android:text="@string/ok"
+                android:textColor="@color/write_2"
+                android:textSize="15dp"
+                android:layout_width="60dp"
+                android:layout_height="25dp" />
+
+            <ScrollView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_restore_message_fragment_backup"
+                    android:layout_width="match_parent"
+                    android:textSize="12sp"
+                    android:layout_height="wrap_content"/>
+            </ScrollView>
+        </LinearLayout>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

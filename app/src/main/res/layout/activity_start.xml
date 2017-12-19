@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/write_2"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_title_activity_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="200dp"
+        android:text="@string/nav_title" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_title_activity_start"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/launcher" />
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_centerHorizontal="true"
+       android:gravity="center"
+       android:orientation="horizontal"
+       android:layout_marginBottom="10dp"
+       android:layout_height="wrap_content">
+       <EditText
+           android:id="@+id/et_password_activity_start"
+           android:layout_width="160dp"
+           android:visibility="gone"
+           android:layout_height="28dp"
+           android:background="@drawable/start_shape"
+           android:gravity="center"
+           android:hint="@string/old_password"
+           android:padding="3dp"
+           android:inputType="textPassword"
+           android:singleLine="true"
+           android:textColor="@color/green"
+           android:textColorHint="@color/transparent_black_2"
+           android:textSize="13sp" />
+       <Button
+           android:id="@+id/btn_ok_activity_start"
+           android:layout_width="wrap_content"
+           android:layout_height="28dp"
+           android:paddingLeft="5dp"
+           android:paddingRight="5dp"
+           android:visibility="gone"
+           android:layout_marginLeft="5dp"
+           android:background="@drawable/btn_start_shape"
+           android:textColor="@color/write_2"
+           android:text="@string/ok"
+           android:textSize="13sp"/>
+   </LinearLayout>
+</RelativeLayout>

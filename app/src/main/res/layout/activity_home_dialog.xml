@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="210dp"
+    android:background="@drawable/home_dialog_shape"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_del_activity_home_dialog"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/btn_del_shape_dialog"
+        android:text="@string/delete"
+        android:textColor="@color/write_2"/>
+
+    <Button
+        android:id="@+id/btn_edit_activity_home_dialog"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_edit_shape_dialog"
+        android:text="@string/edit"
+        android:textColor="@color/write_2"/>
+
+    <Button
+        android:id="@+id/btn_back_activity_home_dialog"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_back_shape_dialog"
+        android:text="@string/back"
+        android:textColor="@color/green"/>
+
+</LinearLayout>
