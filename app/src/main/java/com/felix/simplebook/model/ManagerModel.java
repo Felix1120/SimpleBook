@@ -167,7 +167,7 @@ public class ManagerModel implements IManagerModel {
                             break;
                     }
                 }
-                DecimalFormat df = new DecimalFormat("0");
+                DecimalFormat df = new DecimalFormat("0.00");
                 DecimalFormat dfInt = new DecimalFormat("0");
                 String[] types = {"购物", "餐饮", "交通", "其他"};
                 MyLog.info("ManagerModel", "outMoney=" + outMoney + "  购物=" + moneyBuy);
