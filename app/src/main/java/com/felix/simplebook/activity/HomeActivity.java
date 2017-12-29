@@ -1,7 +1,6 @@
 package com.felix.simplebook.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.design.widget.FloatingActionButton;
@@ -14,27 +13,18 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.felix.simplebook.R;
 import com.felix.simplebook.base.BaseActivity;
 import com.felix.simplebook.fragment.BackupFragment;
 import com.felix.simplebook.fragment.HomeFragment;
 import com.felix.simplebook.fragment.ManagerFragment;
-import com.felix.simplebook.fragment.SettingFragment;
-import com.felix.simplebook.utils.SpinnerPopWindow;
 import com.felix.simplebook.view.IHomeView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by chaofei.xue on 2017/11/24.
@@ -59,7 +49,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private Fragment currentFragment;
     private ManagerFragment managerFragment;
-    private SettingFragment settingFragment;
     private HomeFragment homeFragment;
     private BackupFragment backupFragment;
 
@@ -79,7 +68,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         homeFragment = new HomeFragment();
         managerFragment = new ManagerFragment();
         backupFragment = new BackupFragment();
-        settingFragment = new SettingFragment();
 
         //设置默认界面
         getSupportFragmentManager()
@@ -115,11 +103,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
                         startActivity(new Intent(HomeActivity.this,
                                 AboutActivity.class));
                         break;
-//                    case R.id.setting:
-//                        mActionButton.setVisibility(View.GONE);
-//                        switchFragment(settingFragment);
-//                        break;
-//                    default:
                 }
                 mDrawerLayout.closeDrawers();
                 return true;

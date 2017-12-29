@@ -36,6 +36,17 @@
         <activity
             android:name=".activity.AboutActivity"
             android:theme="@style/MyDialog" />
+
+        <receiver android:name=".utils.MyAppWidgetProvider">
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/simple_book_provider_info">
+            </meta-data>
+            <intent-filter>
+                <action android:name="com.felix.simplebook.click"/>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
