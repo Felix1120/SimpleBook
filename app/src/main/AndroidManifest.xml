@@ -44,6 +44,7 @@
             </meta-data>
             <intent-filter>
                 <action android:name="com.felix.simplebook.click"/>
+                <action android:name="com.felix.simplebook.update.widget"/>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
         </receiver>

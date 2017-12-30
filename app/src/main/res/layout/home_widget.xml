@@ -12,6 +12,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_month_home_widget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
@@ -28,7 +29,7 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/tv_inMoneys_home_widget"
+            android:id="@+id/tv_month_in_home_widget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5000"
@@ -45,7 +46,7 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/tv_outMoneys_home_widget"
+            android:id="@+id/tv_month_out_home_widget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3000"
@@ -62,6 +63,7 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_day_home_widget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
@@ -78,7 +80,7 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/tv_inMoney_home_widget"
+            android:id="@+id/tv_day_in_home_widget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
@@ -95,7 +97,7 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/tv_outMoney_home_widget"
+            android:id="@+id/tv_day_out_home_widget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="30"

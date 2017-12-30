@@ -1,8 +1,10 @@
 package com.felix.simplebook.activity;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -22,6 +24,7 @@ import com.felix.simplebook.base.BaseActivity;
 import com.felix.simplebook.fragment.BackupFragment;
 import com.felix.simplebook.fragment.HomeFragment;
 import com.felix.simplebook.fragment.ManagerFragment;
+import com.felix.simplebook.utils.MyLog;
 import com.felix.simplebook.view.IHomeView;
 
 import butterknife.BindView;
@@ -31,6 +34,8 @@ import butterknife.BindView;
  */
 
 public class HomeActivity extends BaseActivity implements IHomeView {
+
+    public static final String UPDATE_ACTION = "com.felix.simplebook.update.widget";
 
     @BindView(R.id.toolbar_activity_home)
     Toolbar mToolbar;
@@ -123,6 +128,25 @@ public class HomeActivity extends BaseActivity implements IHomeView {
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(HomeActivity.this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        }
+
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putString("month", "12月");
+        bundle.putString("day", "30日");
+        bundle.putString("monthIn", "500");
+        bundle.putString("monthOut", "2500");
+        bundle.putString("dayIn", "0");
+        bundle.putString("dayOut", "50");
+        intent.putExtra("info", bundle);
+        intent.setAction(UPDATE_ACTION);
+        MyLog.info("HomeActivity 广播准备发送");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
+        try {
+            pendingIntent.send();
+            MyLog.info("HomeActivity 广播已发送");
+        } catch (PendingIntent.CanceledException e) {
+            e.printStackTrace();
         }
     }
 
