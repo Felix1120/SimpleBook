@@ -5,5 +5,5 @@ package com.felix.simplebook.view;
  */
 
 public interface IHomeView {
-    void show();
+    void setQueryResult(String[] strings);
 }

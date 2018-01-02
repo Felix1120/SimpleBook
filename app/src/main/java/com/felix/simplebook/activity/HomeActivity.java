@@ -24,6 +24,7 @@ import com.felix.simplebook.base.BaseActivity;
 import com.felix.simplebook.fragment.BackupFragment;
 import com.felix.simplebook.fragment.HomeFragment;
 import com.felix.simplebook.fragment.ManagerFragment;
+import com.felix.simplebook.presenter.HomePresenter;
 import com.felix.simplebook.utils.MyLog;
 import com.felix.simplebook.view.IHomeView;
 
@@ -56,6 +57,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     private ManagerFragment managerFragment;
     private HomeFragment homeFragment;
     private BackupFragment backupFragment;
+    private HomePresenter presenter;
 
     @Override
     public int initLayout() {
@@ -73,6 +75,8 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         homeFragment = new HomeFragment();
         managerFragment = new ManagerFragment();
         backupFragment = new BackupFragment();
+
+        presenter = new HomePresenter(this);
 
         //设置默认界面
         getSupportFragmentManager()
@@ -129,30 +133,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
             ActivityCompat.requestPermissions(HomeActivity.this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
-
-        Intent intent = new Intent();
-        Bundle bundle = new Bundle();
-        bundle.putString("month", "12月");
-        bundle.putString("day", "30日");
-        bundle.putString("monthIn", "500");
-        bundle.putString("monthOut", "2500");
-        bundle.putString("dayIn", "0");
-        bundle.putString("dayOut", "50");
-        intent.putExtra("info", bundle);
-        intent.setAction(UPDATE_ACTION);
-        MyLog.info("HomeActivity 广播准备发送");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
-        try {
-            pendingIntent.send();
-            MyLog.info("HomeActivity 广播已发送");
-        } catch (PendingIntent.CanceledException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void show() {
-
+        presenter.query();
     }
 
 //    @Override
@@ -193,5 +174,34 @@ public class HomeActivity extends BaseActivity implements IHomeView {
                     .commit();
         }
         currentFragment = targetFragment;
+    }
+
+    @Override
+    public void setQueryResult(String[] strings) {
+        MyLog.info("setQueryResult 刷新widget");
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putString("month", strings[0]);
+        bundle.putString("day", strings[1]);
+        bundle.putString("monthIn", strings[2]);
+        bundle.putString("monthOut", strings[3]);
+        bundle.putString("dayIn", strings[4]);
+        bundle.putString("dayOut", strings[5]);
+        intent.putExtra("info", bundle);
+        intent.setAction(UPDATE_ACTION);
+        MyLog.info("HomeActivity 广播准备发送");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
+        try {
+            pendingIntent.send();
+            MyLog.info("HomeActivity 广播已发送");
+        } catch (PendingIntent.CanceledException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.query();
     }
 }
