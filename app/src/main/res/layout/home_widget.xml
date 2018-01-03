@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:text="12月"
+            android:text="月"
             android:textColor="@color/write_2"
             android:textSize="15sp" />
 
@@ -32,7 +32,7 @@
             android:id="@+id/tv_month_in_home_widget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5000"
+            android:text="0"
             android:textColor="@color/write_2"
             android:textSize="15sp" />
 
@@ -49,8 +49,8 @@
             android:id="@+id/tv_month_out_home_widget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3000"
             android:textColor="@color/write_2"
+            android:text="0"
             android:textSize="15sp" />
 
         <TextView
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:text="29日"
+            android:text="日"
             android:textColor="@color/write_2"
             android:textSize="15sp" />
 
@@ -100,7 +100,7 @@
             android:id="@+id/tv_day_out_home_widget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="30"
+            android:text="0"
             android:textColor="@color/write_2"
             android:textSize="15sp" />
     </LinearLayout>

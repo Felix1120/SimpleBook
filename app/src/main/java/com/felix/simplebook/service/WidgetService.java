@@ -4,9 +4,12 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -14,6 +17,7 @@ import android.os.SystemClock;
 import android.widget.RemoteViews;
 
 import com.felix.simplebook.R;
+import com.felix.simplebook.activity.HomeActivity;
 import com.felix.simplebook.utils.MyAppWidgetProvider;
 import com.felix.simplebook.utils.MyLog;
 
@@ -21,10 +25,10 @@ import com.felix.simplebook.utils.MyLog;
  * Created by chaofei.xue on 2018/1/2.
  */
 public class WidgetService extends Service {
-    private static final int ALARM_DURATION  = 5 * 60 * 1000; // service 自启间隔
-    private static final int UPDATE_DURATION = 2 * 1000;     // Widget 更新间隔
+    private static final int ALARM_DURATION  = 60 * 60 * 1000; // service 自启间隔
+    private static final int UPDATE_DURATION = 3 * 1000;     // Widget 更新间隔
     private static final int UPDATE_MESSAGE  = 1000;
-    private int i;
+    private static Intent intent;
 
     private UpdateHandler updateHandler; // 更新 Widget 的 Handler
 
@@ -55,18 +59,41 @@ public class WidgetService extends Service {
         Message message = updateHandler.obtainMessage();
         message.what = UPDATE_MESSAGE;
         updateHandler.sendMessageDelayed(message, UPDATE_DURATION);
+
+        //注册广播接收器
+        UpdateReceiver update = new UpdateReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(HomeActivity.UPDATE_ACTION);
+        registerReceiver(update, filter);
     }
 
     private void updateWidget() {
         // 更新 Widget
-        RemoteViews remoteViews = new RemoteViews(getApplicationContext().getPackageName(),
-                R.layout.home_widget);
-        i++;
-        remoteViews.setTextViewText(R.id.tv_month_home_widget, i + "");
-        MyLog.info("service : "+i);
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-        appWidgetManager.updateAppWidget(new ComponentName(this, MyAppWidgetProvider.class),
-                remoteViews);
+        if(intent != null) {
+            Bundle bundle = intent.getBundleExtra("info");
+            String month = bundle.getString("month");
+            String day = bundle.getString("day");
+            String monthIn = bundle.getString("monthIn");
+            String monthOut = bundle.getString("monthOut");
+            String dayIn = bundle.getString("dayIn");
+            String dayOut = bundle.getString("dayOut");
+
+            MyLog.info("intent 不为空 moth = " + month);
+
+            RemoteViews remoteViews = new RemoteViews(getApplicationContext().getPackageName(),
+                    R.layout.home_widget);
+            remoteViews.setTextViewText(R.id.tv_month_home_widget, month + "月");
+            remoteViews.setTextViewText(R.id.tv_day_home_widget, day + "日");
+            remoteViews.setTextViewText(R.id.tv_month_in_home_widget, monthIn);
+            remoteViews.setTextViewText(R.id.tv_month_out_home_widget, monthOut);
+            remoteViews.setTextViewText(R.id.tv_day_in_home_widget, dayIn);
+            remoteViews.setTextViewText(R.id.tv_day_out_home_widget, dayOut);
+            MyLog.info("MyAppWidgetProvider", month + " " + day + "");
+
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+            appWidgetManager.updateAppWidget(new ComponentName(this, MyAppWidgetProvider.class),
+                    remoteViews);
+        }
 
         // 发送下次更新的消息
         Message message = updateHandler.obtainMessage();
@@ -85,6 +112,14 @@ public class WidgetService extends Service {
                 default:
                     break;
             }
+        }
+    }
+
+    private class UpdateReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intents) {
+            intent = intents;
+            MyLog.info("UpdateReceiver 收到信息");
         }
     }
 }

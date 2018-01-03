@@ -190,13 +190,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         intent.putExtra("info", bundle);
         intent.setAction(UPDATE_ACTION);
         MyLog.info("HomeActivity 广播准备发送");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
-        try {
-            pendingIntent.send();
-            MyLog.info("HomeActivity 广播已发送");
-        } catch (PendingIntent.CanceledException e) {
-            e.printStackTrace();
-        }
+        mContext.sendBroadcast(intent);
     }
 
     @Override
