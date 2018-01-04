@@ -21,6 +21,7 @@ import android.widget.FrameLayout;
 
 import com.felix.simplebook.R;
 import com.felix.simplebook.base.BaseActivity;
+import com.felix.simplebook.fragment.AddFragment;
 import com.felix.simplebook.fragment.BackupFragment;
 import com.felix.simplebook.fragment.HomeFragment;
 import com.felix.simplebook.fragment.ManagerFragment;
@@ -57,6 +58,8 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     private ManagerFragment managerFragment;
     private HomeFragment homeFragment;
     private BackupFragment backupFragment;
+    private AddFragment addFragment;
+
     private HomePresenter presenter;
 
     @Override
@@ -75,6 +78,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         homeFragment = new HomeFragment();
         managerFragment = new ManagerFragment();
         backupFragment = new BackupFragment();
+        addFragment = new AddFragment();
 
         presenter = new HomePresenter(this);
 
@@ -111,6 +115,10 @@ public class HomeActivity extends BaseActivity implements IHomeView {
                     case R.id.about:
                         startActivity(new Intent(HomeActivity.this,
                                 AboutActivity.class));
+                        break;
+                    case R.id.add_type:
+                        mActionButton.setVisibility(View.GONE);
+                        switchFragment(addFragment);
                         break;
                 }
                 mDrawerLayout.closeDrawers();
