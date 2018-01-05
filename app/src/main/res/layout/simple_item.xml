@@ -21,6 +21,14 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/write_2"
+        android:id="@+id/tv_in_or_out_simple_item" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/write_2"
         android:id="@+id/tv_money_simple_item" />
 
     <TextView

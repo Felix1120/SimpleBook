@@ -70,7 +70,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HolderView> {
                 holder.imgLeft.setBackgroundResource(R.drawable.bus);
                 holder.imgRight.setBackgroundResource(R.drawable.car);
                 break;
-            case "其他":
+            default:
                 holder.imgLeft.setBackgroundResource(R.drawable.film_reel);
                 holder.imgRight.setBackgroundResource(R.drawable.dumbbell);
                 break;

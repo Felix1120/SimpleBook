@@ -1,12 +1,14 @@
 package com.felix.simplebook.fragment;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -14,14 +16,18 @@ import android.widget.Toast;
 
 import com.felix.simplebook.R;
 import com.felix.simplebook.base.BaseFragment;
+import com.felix.simplebook.callback.IOnClickListener;
 import com.felix.simplebook.presenter.BackUpPresenter;
 import com.felix.simplebook.presenter.IBackUpPresenter;
 import com.felix.simplebook.utils.MyLog;
 import com.felix.simplebook.utils.MyToast;
+import com.felix.simplebook.utils.SpinnerPopWindow;
 import com.felix.simplebook.view.IBackupView;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
@@ -41,6 +47,8 @@ public class BackupFragment extends BaseFragment implements IBackupView {
     Button btnBackUp;
     @BindView(R.id.tv_backup_message_fragment_backup)
     TextView tvBackUpMessage;
+    @BindView(R.id.et_backup_type_name_fragment_backup)
+    EditText etBackupType;
 
     @BindView(R.id.ll_restore_fragment_backup)
     LinearLayout llRestore;
@@ -50,6 +58,8 @@ public class BackupFragment extends BaseFragment implements IBackupView {
     Button btnStore;
     @BindView(R.id.tv_restore_message_fragment_backup)
     TextView tvRestoreMessage;
+    @BindView(R.id.et_restore_type_name_fragment_backup)
+    EditText etRestoreType;
 
     @BindView(R.id.rg_fragment_backup)
     RadioGroup radioGroup;
@@ -95,6 +105,11 @@ public class BackupFragment extends BaseFragment implements IBackupView {
             }
         });
         presenter = new BackUpPresenter(BackupFragment.this);
+        List<String> lists = new ArrayList<>();
+        lists.add("默认格式");
+        lists.add("Excel格式");
+        setSpinner(lists, etBackupType);
+        setSpinner(lists, etRestoreType);
     }
 
     @Override
@@ -125,10 +140,16 @@ public class BackupFragment extends BaseFragment implements IBackupView {
                     MyToast.makeText(getActivity(), "请选择保存路径", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //write data
-                presenter.databaseToFile(etBackUpPath.getText().toString(), name);
-                btnBackUp.setBackgroundResource(R.drawable.unbtn_ok_shape);
-                btnBackUp.setEnabled(false);
+                if(etBackupType.getText().toString().equals(getResources()
+                        .getString(R.string.default_type))) {
+                    //write data default
+                    presenter.databaseToFile(etBackUpPath.getText().toString(), name);
+                    btnBackUp.setBackgroundResource(R.drawable.unbtn_ok_shape);
+                    btnBackUp.setEnabled(false);
+                }else{
+                    //write data excel
+
+                }
             }
         });
 
@@ -155,10 +176,12 @@ public class BackupFragment extends BaseFragment implements IBackupView {
                             .show();
                     return;
                 }
-                //read data
+                //read data default
                 presenter.fileToDatabase(etRestorePath.getText().toString());
                 btnStore.setBackgroundResource(R.drawable.unbtn_ok_shape);
                 btnStore.setEnabled(false);
+
+                //read data excel
             }
         });
     }
@@ -231,4 +254,50 @@ public class BackupFragment extends BaseFragment implements IBackupView {
             }
         });
     }
+
+    public void setSpinner(List<String> list, final EditText typeEt) {
+        final SpinnerPopWindow mSpinnerPopWindow = new SpinnerPopWindow(mContext, list);
+        mSpinnerPopWindow.setListener( new ClickListener(typeEt, mSpinnerPopWindow));
+        mSpinnerPopWindow.setOnDismissListener(new DismissListener(typeEt));
+        typeEt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSpinnerPopWindow.setWidth(typeEt.getWidth());
+                mSpinnerPopWindow.showAsDropDown(typeEt);
+                setTextImage(R.drawable.spinner_write_up, typeEt);
+            }
+        });
+    }
+
+    private class DismissListener implements PopupWindow.OnDismissListener {
+        private EditText typeEt;
+        public DismissListener(EditText typeEt){
+            this.typeEt = typeEt;
+        }
+        @Override
+        public void onDismiss() {
+            setTextImage(R.drawable.spinner_write_down, typeEt);
+        }
+    }
+
+    private class ClickListener implements IOnClickListener{
+        EditText typeEt;
+        SpinnerPopWindow mSpinnerPopWindow;
+        public ClickListener(EditText typeEt, SpinnerPopWindow mSpinnerPopWindow){
+            this.typeEt = typeEt;
+            this.mSpinnerPopWindow = mSpinnerPopWindow;
+        }
+        @Override
+        public void onClick(String value) {
+            typeEt.setText(value);
+            mSpinnerPopWindow.dismiss();
+        }
+    }
+
+    private void setTextImage(int resId, EditText typeEt) {
+        Drawable drawable = getResources().getDrawable(resId);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(),drawable.getMinimumHeight());
+        typeEt.setCompoundDrawables(null, null, drawable, null);
+    }
+
 }

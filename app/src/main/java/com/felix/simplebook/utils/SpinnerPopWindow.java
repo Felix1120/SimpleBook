@@ -31,6 +31,16 @@ public class SpinnerPopWindow extends PopupWindow {
         init(listener);
     }
 
+    public SpinnerPopWindow(Context context, List<String> lists) {
+        MyLog.info("弹窗初始化");
+        this.lists = lists;
+        this.context = context;
+    }
+
+    public void setListener(IOnClickListener listener){
+        init(listener);
+    }
+
     private void init(IOnClickListener listener){
         View view = LayoutInflater.from(context).inflate(R.layout.spinner_window_layou, null);
         setContentView(view);

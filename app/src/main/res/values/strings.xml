@@ -8,6 +8,7 @@
     <string name="money">金额</string>
     <string name="type">用途</string>
     <string name="type_2">类型</string>
+    <string name="in_or_out">入/出</string>
     <string name="proportion">占比</string>
     <string name="in">收入</string>
     <string name="out">支出</string>
@@ -60,16 +61,7 @@
     <string name="out_excel">数据导出</string>
     <string name="theme">主题更换</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="default_type">默认格式</string>
+    <string name="excel_type">Excel格式</string>
+
 </resources>

@@ -35,4 +35,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile project(':library')
+    compile files('F:/MyFile/SBCM/libs/jxl.jar')
 }

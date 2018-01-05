@@ -37,7 +37,6 @@
         </RadioGroup>
 
         <LinearLayout
-
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:layout_marginTop="10dp"
@@ -47,6 +46,21 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/rg_fragment_backup"
             android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_backup_type_name_fragment_backup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_shape_backup_red"
+                android:drawableRight="@drawable/spinner_write_down"
+                android:editable="false"
+                android:gravity="center"
+                android:padding="3dp"
+                android:singleLine="true"
+                android:text="@string/default_type"
+                android:textColor="@color/write_2"
+                android:textSize="15dp" />
+
             <EditText
                 android:editable="false"
                 android:id="@+id/et_file_path_fragment_backup"
@@ -56,6 +70,7 @@
                 android:gravity="center"
                 android:padding="3dp"
                 android:textSize="15dp"
+                android:layout_marginTop="10dp"
                 android:singleLine="true"
                 android:textColor="@color/write_2"
                 android:layout_height="wrap_content" />
@@ -71,6 +86,7 @@
                 android:singleLine="true"
                 android:textSize="15dp"
                 android:layout_height="wrap_content" />
+
             <Button
                 android:id="@+id/btn_backup_fragment_backup"
                 android:layout_marginTop="10dp"
@@ -103,6 +119,21 @@
             android:gravity="center_horizontal"
             android:layout_below="@+id/rg_fragment_backup"
             android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_restore_type_name_fragment_backup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_shape_backup_red"
+                android:drawableRight="@drawable/spinner_write_down"
+                android:editable="false"
+                android:gravity="center"
+                android:padding="3dp"
+                android:singleLine="true"
+                android:text="@string/default_type"
+                android:textColor="@color/write_2"
+                android:textSize="15dp" />
+
             <EditText
                 android:editable="false"
                 android:id="@+id/et_file_path_restore_fragment_backup"
@@ -112,9 +143,11 @@
                 android:gravity="center"
                 android:padding="3dp"
                 android:singleLine="true"
+                android:layout_marginTop="10dp"
                 android:textSize="15dp"
                 android:textColor="@color/write_2"
                 android:layout_height="wrap_content" />
+
             <Button
                 android:id="@+id/btn_restore_fragment_backup"
                 android:layout_marginTop="10dp"

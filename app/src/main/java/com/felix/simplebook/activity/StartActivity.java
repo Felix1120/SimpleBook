@@ -55,7 +55,7 @@ public class StartActivity extends Activity {
             public void run() {
                 super.run();
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
