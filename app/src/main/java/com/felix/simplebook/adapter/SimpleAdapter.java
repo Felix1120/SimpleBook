@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.felix.simplebook.R;
 import com.felix.simplebook.bean.SimpleBean;
+import com.felix.simplebook.utils.MyLog;
 
 import java.util.List;
 
@@ -35,14 +36,10 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if(lists.get(position).getMoney().equals("0")){
-            //移除money为0的项
-            lists.remove(position);
-        }
-        if(lists.get(position).getIn_or_out().equals("in")){
+        if (lists.get(position).getIn_or_out().equals("in")) {
             holder.llSimple.setBackgroundResource(R.color.green);
             holder.tvInOrOut.setText("收入");
-        }else{
+        } else {
             holder.llSimple.setBackgroundResource(R.color.red);
             holder.tvInOrOut.setText("支出");
         }
@@ -53,13 +50,7 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        int size = 0;
-        for(SimpleBean simpleBean : lists){
-            if(!simpleBean.getMoney().equals("0")){
-                size++;
-            }
-        }
-        return size;
+        return lists.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,6 +59,7 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder
         private TextView tvMoney;
         private TextView tvProportion;
         private TextView tvInOrOut;
+
         public ViewHolder(View itemView) {
             super(itemView);
             llSimple = itemView.findViewById(R.id.ll_simple_item);

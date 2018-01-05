@@ -41,7 +41,7 @@ public class AddAdapter extends RecyclerView.Adapter<AddAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvTitle.setText(lists.get(position).getType());
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,12 +54,20 @@ public class AddAdapter extends RecyclerView.Adapter<AddAdapter.ViewHolder> {
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int delete = DataSupport.delete(TypeBean.class, lists.get(position).getId());
-                if (delete > 0) {
-                    Intent intent = new Intent();
-                    intent.setAction(AddFragment.UPDATE_ADD_FRAGMENT);
-                    context.sendBroadcast(intent);
-                }
+                MyToast.makeText(context, "长按删除", Toast.LENGTH_SHORT).show();
+                holder.imgDelete.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        int delete = DataSupport.delete(TypeBean.class, lists.get(position).getId());
+                        if (delete > 0) {
+                            Intent intent = new Intent();
+                            intent.setAction(AddFragment.UPDATE_ADD_FRAGMENT);
+                            context.sendBroadcast(intent);
+                            MyToast.makeText(context, "已删除", Toast.LENGTH_SHORT).show();
+                        }
+                        return false;
+                    }
+                });
             }
         });
     }
