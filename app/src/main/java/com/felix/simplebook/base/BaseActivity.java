@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.felix.simplebook.utils.AutoBackUp;
 import com.felix.simplebook.utils.MyLog;
 import com.felix.simplebook.utils.MyToast;
 
@@ -71,6 +72,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         MyLog.info("currentTime-" + currentTime);
         if (System.currentTimeMillis() - currentTime < 2000
                 && System.currentTimeMillis() - currentTime > 100) {
+            //自动备份数据
+            new AutoBackUp().startBackup();
+
             for (Activity activity : list){
                 activity.finish();
             }
