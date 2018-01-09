@@ -59,6 +59,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     private HomeFragment homeFragment;
     private BackupFragment backupFragment;
     private AddFragment addFragment;
+    private ActionBar actionBar;
 
     private HomePresenter presenter;
 
@@ -70,7 +71,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     @Override
     public void initView() {
         setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.menu);
@@ -80,7 +81,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         backupFragment = new BackupFragment();
         addFragment = new AddFragment();
 
-        presenter = new HomePresenter(this);
+        presenter = new HomePresenter(this, mContext);
 
         //设置默认界面
         getSupportFragmentManager()

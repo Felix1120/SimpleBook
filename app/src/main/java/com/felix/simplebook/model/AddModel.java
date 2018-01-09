@@ -4,6 +4,8 @@ import com.felix.simplebook.callback.ICallBack;
 import com.felix.simplebook.database.TypeBean;
 
 import org.litepal.crud.DataSupport;
+import org.litepal.crud.async.FindMultiExecutor;
+import org.litepal.crud.callback.FindMultiCallback;
 
 import java.util.List;
 
@@ -19,8 +21,12 @@ public class AddModel implements IAddModel {
             @Override
             public void run() {
                 super.run();
-                List<TypeBean> lists = DataSupport.findAll(TypeBean.class);
-                callBack.successful(lists);
+                DataSupport.findAllAsync(TypeBean.class).listen(new FindMultiCallback() {
+                    @Override
+                    public <T> void onFinish(List<T> t) {
+                        callBack.successful((List<TypeBean>) t);
+                    }
+                });
             }
         }.start();
     }

@@ -7,4 +7,6 @@ package com.felix.simplebook.presenter;
 public interface IBackUpPresenter {
     void databaseToFile(String...path);
     void fileToDatabase(String...path);
+    void databaseToExcel(String...path);
+    void excelToDatabase(String...path);
 }

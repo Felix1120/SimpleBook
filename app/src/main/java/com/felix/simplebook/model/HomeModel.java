@@ -5,6 +5,7 @@ import com.felix.simplebook.database.InfoBean;
 import com.felix.simplebook.database.MyDataBase;
 import com.felix.simplebook.utils.MyLog;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -27,29 +28,30 @@ public class HomeModel implements IHomeModel {
 
             @Override
             public void onNext(List<InfoBean> infoBeans) {
-                int monthInMoney = 0, monthOutMoney = 0;
-                int dayInMoney = 0, dayOutMoney = 0;
+                double monthInMoney = 0, monthOutMoney = 0;
+                double dayInMoney = 0, dayOutMoney = 0;
+                DecimalFormat dfInt = new DecimalFormat("0");
                 String[] result = new String[6];
                 for (InfoBean infoBean : infoBeans) {
                     //统计同一个月
                     if (infoBean.getMonth().equals(month) && infoBean.getInOrOut().equals("out")) {
-                        monthOutMoney += Integer.valueOf(infoBean.getMoney());
+                        monthOutMoney += Double.valueOf(infoBean.getMoney());
                     } else if (infoBean.getMonth().equals(month) && infoBean.getInOrOut().equals("in")) {
-                        monthInMoney += Integer.valueOf(infoBean.getMoney());
+                        monthInMoney += Double.valueOf(infoBean.getMoney());
                     }
                     //统计同一天
                     if (infoBean.getDay().equals(day) && infoBean.getInOrOut().equals("out")) {
-                        dayOutMoney += Integer.valueOf(infoBean.getMoney());
+                        dayOutMoney += Double.valueOf(infoBean.getMoney());
                     } else if (infoBean.getDay().equals(day) && infoBean.getInOrOut().equals("in")) {
-                        dayInMoney += Integer.valueOf(infoBean.getMoney());
+                        dayInMoney += Double.valueOf(infoBean.getMoney());
                     }
                 }
                 result[0] = month;
                 result[1] = day;
-                result[2] = monthInMoney + "";
-                result[3] = monthOutMoney + "";
-                result[4] = dayInMoney + "";
-                result[5] = dayOutMoney + "";
+                result[2] = dfInt.format(monthInMoney);
+                result[3] = dfInt.format(monthOutMoney);
+                result[4] = dfInt.format(dayInMoney);
+                result[5] = dfInt.format(dayOutMoney);
                 MyLog.info("HomeModel :" + result[0] +"  "+ result[1] +"  " + result[2]
                         +"  "+result[3] +"  " + result[4] +"  "+ result[5]);
                 callBack.successful(result);

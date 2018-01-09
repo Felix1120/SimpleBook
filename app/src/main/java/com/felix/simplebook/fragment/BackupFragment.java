@@ -140,15 +140,18 @@ public class BackupFragment extends BaseFragment implements IBackupView {
                     MyToast.makeText(getActivity(), "请选择保存路径", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(etBackupType.getText().toString().equals(getResources()
+                if (etBackupType.getText().toString().equals(getResources()
                         .getString(R.string.default_type))) {
                     //write data default
                     presenter.databaseToFile(etBackUpPath.getText().toString(), name);
                     btnBackUp.setBackgroundResource(R.drawable.unbtn_ok_shape);
                     btnBackUp.setEnabled(false);
-                }else{
+                } else {
                     //write data excel
-
+                    presenter.databaseToExcel(etBackUpPath.getText().toString()
+                            .trim(), name);
+                    btnBackUp.setBackgroundResource(R.drawable.unbtn_ok_shape);
+                    btnBackUp.setEnabled(false);
                 }
             }
         });
@@ -161,7 +164,7 @@ public class BackupFragment extends BaseFragment implements IBackupView {
                         .withSupportFragment(BackupFragment.this)
                         .withRequestCode(RESTORE_REQUEST)
                         .withHiddenFiles(true)
-                        .withFilter(Pattern.compile(".*\\.bu$"))
+                        .withFilter(Pattern.compile(".*\\.bu$||.*\\.xls$"))
                         .withFilterDirectories(false)
                         .start();
             }
@@ -176,12 +179,18 @@ public class BackupFragment extends BaseFragment implements IBackupView {
                             .show();
                     return;
                 }
-                //read data default
-                presenter.fileToDatabase(etRestorePath.getText().toString());
-                btnStore.setBackgroundResource(R.drawable.unbtn_ok_shape);
-                btnStore.setEnabled(false);
-
-                //read data excel
+                if (etRestoreType.getText().toString().equals(getResources()
+                        .getString(R.string.default_type))) {
+                    //read data default
+                    presenter.fileToDatabase(etRestorePath.getText().toString());
+                    btnStore.setBackgroundResource(R.drawable.unbtn_ok_shape);
+                    btnStore.setEnabled(false);
+                } else {
+                    //read data excel
+                    presenter.excelToDatabase(etRestorePath.getText().toString().trim());
+                    btnStore.setBackgroundResource(R.drawable.unbtn_ok_shape);
+                    btnStore.setEnabled(false);
+                }
             }
         });
     }
@@ -206,7 +215,7 @@ public class BackupFragment extends BaseFragment implements IBackupView {
                 MyLog.info("data:", backUpPath);
                 etBackUpPath.setText(backUpPath);
             }
-        }else if(requestCode == RESTORE_REQUEST){
+        } else if (requestCode == RESTORE_REQUEST) {
             if (data != null) {
                 restorePath = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
                 MyLog.info("data:", restorePath);
@@ -257,7 +266,7 @@ public class BackupFragment extends BaseFragment implements IBackupView {
 
     public void setSpinner(List<String> list, final EditText typeEt) {
         final SpinnerPopWindow mSpinnerPopWindow = new SpinnerPopWindow(mContext, list);
-        mSpinnerPopWindow.setListener( new ClickListener(typeEt, mSpinnerPopWindow));
+        mSpinnerPopWindow.setListener(new ClickListener(typeEt, mSpinnerPopWindow));
         mSpinnerPopWindow.setOnDismissListener(new DismissListener(typeEt));
         typeEt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -271,22 +280,26 @@ public class BackupFragment extends BaseFragment implements IBackupView {
 
     private class DismissListener implements PopupWindow.OnDismissListener {
         private EditText typeEt;
-        public DismissListener(EditText typeEt){
+
+        public DismissListener(EditText typeEt) {
             this.typeEt = typeEt;
         }
+
         @Override
         public void onDismiss() {
             setTextImage(R.drawable.spinner_write_down, typeEt);
         }
     }
 
-    private class ClickListener implements IOnClickListener{
+    private class ClickListener implements IOnClickListener {
         EditText typeEt;
         SpinnerPopWindow mSpinnerPopWindow;
-        public ClickListener(EditText typeEt, SpinnerPopWindow mSpinnerPopWindow){
+
+        public ClickListener(EditText typeEt, SpinnerPopWindow mSpinnerPopWindow) {
             this.typeEt = typeEt;
             this.mSpinnerPopWindow = mSpinnerPopWindow;
         }
+
         @Override
         public void onClick(String value) {
             typeEt.setText(value);
@@ -296,7 +309,7 @@ public class BackupFragment extends BaseFragment implements IBackupView {
 
     private void setTextImage(int resId, EditText typeEt) {
         Drawable drawable = getResources().getDrawable(resId);
-        drawable.setBounds(0, 0, drawable.getMinimumWidth(),drawable.getMinimumHeight());
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         typeEt.setCompoundDrawables(null, null, drawable, null);
     }
 

@@ -9,4 +9,6 @@ import com.felix.simplebook.callback.ICallBacking;
 public interface IBackUpModel {
     void databaseToFile(ICallBacking<String> callBack, String...path);
     void fileToDatabase(ICallBacking<String> callBack, String...path);
+    void databaseToExcel(ICallBacking<String> callBack, String...path);
+    void excelToDatabase(ICallBacking<String> callBack, String...path);
 }

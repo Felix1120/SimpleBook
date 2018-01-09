@@ -19,7 +19,7 @@
         android:layout_above="@+id/tv_title_activity_start"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/launcher" />
+        android:src="@drawable/logo" />
    <LinearLayout
        android:layout_width="wrap_content"
        android:layout_alignParentBottom="true"

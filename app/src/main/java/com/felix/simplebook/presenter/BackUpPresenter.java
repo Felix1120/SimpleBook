@@ -86,4 +86,65 @@ public class BackUpPresenter implements IBackUpPresenter {
             }
         }, path);
     }
+
+    @Override
+    public void databaseToExcel(String... path) {
+        if(path[1].length() > 15){
+            backupView.showMessage("文件名过长");
+            return;
+        }
+        stringBuffer.delete(0, stringBuffer.length());
+        backUpModel.databaseToExcel(new ICallBacking<String>() {
+            @Override
+            public void successful(String value) {
+                backupView.showMessage(value);
+                stringBuffer.append("提示：" + value + "\n");
+                backupView.showInfo(BackupFragment.TYPE_BACKUP, stringBuffer.toString());
+            }
+
+            @Override
+            public void error(String value) {
+                backupView.showMessage(value);
+                stringBuffer.append("提示：" + value + "\n");
+                backupView.showInfo(BackupFragment.TYPE_BACKUP, stringBuffer.toString());
+            }
+
+            @Override
+            public void updateInfo(String info) {
+                stringBuffer.append("提示：已备份 "+info + "\n");
+                backupView.showInfo(BackupFragment.TYPE_BACKUP, stringBuffer.toString());
+            }
+        }, path);
+    }
+
+    @Override
+    public void excelToDatabase(String... path) {
+        String[] strings = path[0].split("\\.");
+        if(!strings[strings.length-1].equals("xls")){
+            backupView.showMessage("请选择正确的Excel文件,只支持xls格式");
+            return;
+        }
+        stringBuffer.delete(0, stringBuffer.length());
+        backUpModel.excelToDatabase(new ICallBacking<String>() {
+            @Override
+            public void successful(String value) {
+                backupView.showMessage(value);
+                stringBuffer.append("提示："+ value + "\n");
+                backupView.showInfo(BackupFragment.TYPE_RESTORE, stringBuffer.toString());
+            }
+
+            @Override
+            public void error(String value) {
+                backupView.showMessage(value);
+                stringBuffer.append("提示：" + value + "\n");
+                backupView.showInfo(BackupFragment.TYPE_RESTORE, stringBuffer.toString());
+            }
+
+            @Override
+            public void updateInfo(String info) {
+                stringBuffer.append("提示："+info + "\n");
+                backupView.showInfo(BackupFragment.TYPE_RESTORE, stringBuffer.toString());
+            }
+        }, path);
+    }
 }
