@@ -69,7 +69,6 @@
             android:editable="false"
             android:drawableRight="@drawable/spinner_down"
             android:singleLine="true"
-            android:text="@string/buy"
             android:textColor="@color/green"
             android:textSize="15sp"/>
     </LinearLayout>

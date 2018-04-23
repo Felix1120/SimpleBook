@@ -11,4 +11,5 @@ public interface IHomeShowView {
     void cancel();
     void setData(String inOrOut, String time, String type, String money, String status);
     void setSpinner(List<String> list);
+    void setType(String type);
 }

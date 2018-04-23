@@ -3,14 +3,16 @@ package com.felix.simplebook.presenter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.felix.simplebook.R;
 import com.felix.simplebook.callback.ICallBack;
+import com.felix.simplebook.database.InfoBean;
+import com.felix.simplebook.database.TypeBean;
 import com.felix.simplebook.model.HomeShowModel;
 import com.felix.simplebook.model.IHomeShowModel;
-import com.felix.simplebook.database.InfoBean;
 import com.felix.simplebook.utils.MyLog;
-import com.felix.simplebook.database.TypeBean;
+import com.felix.simplebook.utils.MyToast;
 import com.felix.simplebook.view.IHomeShowView;
 
 import java.util.ArrayList;
@@ -163,6 +165,11 @@ public class HomeShowPresenter implements IHomeShowPresenter {
                     list.add(typeBean.getType());
                 }
                 mShowView.setSpinner(list);
+                try {
+                    mShowView.setType(list.get(0));
+                } catch (Exception e) {
+                    MyToast.makeText(mContext, "类型为空，请添加类型", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
             public void error(String value) {

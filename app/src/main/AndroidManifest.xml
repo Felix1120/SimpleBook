@@ -41,7 +41,7 @@
         <receiver android:name=".utils.MyAppWidgetProvider">
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/simple_book_provider_info"></meta-data>
+                android:resource="@xml/simple_book_provider_info" />
 
             <intent-filter>
                 <action android:name="com.felix.simplebook.click" />

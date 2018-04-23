@@ -148,6 +148,11 @@ public class HomeShowActivity extends BaseActivity implements IHomeShowView {
     }
 
     @Override
+    public void setType(String type) {
+        typeEt.setText(type);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         bind.unbind();
