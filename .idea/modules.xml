@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SBCM.iml" filepath="$PROJECT_DIR$/SBCM.iml" />
-      <module fileurl="file://F:\MyFile\SBCM\SBCM.iml" filepath="F:\MyFile\SBCM\SBCM.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://F:\MyFile\SBCM\app\app.iml" filepath="F:\MyFile\SBCM\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
-      <module fileurl="file://F:\MyFile\SBCM\library\library.iml" filepath="F:\MyFile\SBCM\library\library.iml" />
     </modules>
   </component>
 </project>

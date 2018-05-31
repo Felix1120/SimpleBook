@@ -54,6 +54,7 @@
         <activity
             android:name=".activity.AddDialogActivity"
             android:theme="@style/MyDialog" />
+        <activity android:name=".activity.BackupNetActivity"></activity>
     </application>
 
 </manifest>

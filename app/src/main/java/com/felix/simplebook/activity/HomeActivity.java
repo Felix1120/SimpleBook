@@ -121,6 +121,10 @@ public class HomeActivity extends BaseActivity implements IHomeView {
                         mActionButton.setVisibility(View.GONE);
                         switchFragment(addFragment);
                         break;
+                    case R.id.backup_internet:
+                        mActionButton.setVisibility(View.GONE);
+                        switchFragment(addFragment);
+                        break;
                 }
                 mDrawerLayout.closeDrawers();
                 return true;

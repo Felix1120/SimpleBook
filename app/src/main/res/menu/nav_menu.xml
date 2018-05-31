@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/my_center"
+            android:icon="@drawable/my"
+            android:title="个人中心" />
+        <item
             android:id="@+id/my_home"
             android:icon="@drawable/edit"
             android:title="我的首页" />
@@ -20,7 +24,11 @@
         <item
             android:id="@+id/backup"
             android:icon="@drawable/backup"
-            android:title="备份还原" />
+            android:title="本地备份" />
+        <item
+            android:id="@+id/backup_internet"
+            android:icon="@drawable/backup_internet"
+            android:title="网络备份" />
         <item
             android:id="@+id/about"
             android:icon="@drawable/info"
