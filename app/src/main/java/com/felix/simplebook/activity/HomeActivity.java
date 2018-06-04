@@ -105,14 +105,14 @@ public class HomeActivity extends BaseActivity implements IHomeView {
                         mActionButton.setVisibility(View.GONE);
                         switchFragment(new ManagerFragment());
                         break;
-                    case R.id.lock:
-                        startActivity(new Intent(HomeActivity.this,
-                                LockActivity.class));
-                        break;
-                    case R.id.backup:
-                        mActionButton.setVisibility(View.GONE);
-                        switchFragment(backupFragment);
-                        break;
+//                    case R.id.lock:
+//                        startActivity(new Intent(HomeActivity.this,
+//                                LockActivity.class));
+//                        break;
+//                    case R.id.backup:
+//                        mActionButton.setVisibility(View.GONE);
+//                        switchFragment(backupFragment);
+//                        break;
                     case R.id.about:
                         startActivity(new Intent(HomeActivity.this,
                                 AboutActivity.class));
@@ -121,9 +121,9 @@ public class HomeActivity extends BaseActivity implements IHomeView {
                         mActionButton.setVisibility(View.GONE);
                         switchFragment(addFragment);
                         break;
-                    case R.id.backup_internet:
-                        mActionButton.setVisibility(View.GONE);
-                        switchFragment(addFragment);
+                    case R.id.my_center:
+                        startActivity(new Intent(HomeActivity.this,
+                                MyCenterActivity.class));
                         break;
                 }
                 mDrawerLayout.closeDrawers();

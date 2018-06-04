@@ -40,7 +40,7 @@
     <!--菜单-->
     <string name="home">我的首页</string>
     <string name="manager">账单查询</string>
-    <string name="setting">个人设置</string>
+    <string name="center">个人中心</string>
     <string name="lock">加密设置</string>
     <string name="backup">备份还原</string>
     <string name="about">关于软件</string>

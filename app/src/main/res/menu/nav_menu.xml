@@ -2,10 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/my_center"
-            android:icon="@drawable/my"
-            android:title="个人中心" />
-        <item
             android:id="@+id/my_home"
             android:icon="@drawable/edit"
             android:title="我的首页" />
@@ -17,18 +13,22 @@
             android:id="@+id/add_type"
             android:icon="@drawable/add"
             android:title="添加类型" />
+        <!--<item-->
+            <!--android:id="@+id/lock"-->
+            <!--android:icon="@drawable/setting"-->
+            <!--android:title="加密设置" />-->
+        <!--<item-->
+            <!--android:id="@+id/backup"-->
+            <!--android:icon="@drawable/backup"-->
+            <!--android:title="本地备份" />-->
+        <!--<item-->
+            <!--android:id="@+id/backup_internet"-->
+            <!--android:icon="@drawable/backup_internet"-->
+            <!--android:title="网络备份" />-->
         <item
-            android:id="@+id/lock"
-            android:icon="@drawable/setting"
-            android:title="加密设置" />
-        <item
-            android:id="@+id/backup"
-            android:icon="@drawable/backup"
-            android:title="本地备份" />
-        <item
-            android:id="@+id/backup_internet"
-            android:icon="@drawable/backup_internet"
-            android:title="网络备份" />
+            android:id="@+id/my_center"
+            android:icon="@drawable/my_center"
+            android:title="个人中心" />
         <item
             android:id="@+id/about"
             android:icon="@drawable/info"

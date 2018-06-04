@@ -54,7 +54,10 @@
         <activity
             android:name=".activity.AddDialogActivity"
             android:theme="@style/MyDialog" />
-        <activity android:name=".activity.BackupNetActivity"></activity>
+        <activity android:name=".activity.BackupNetActivity" />
+        <activity
+            android:name=".activity.MyCenterActivity"
+            android:theme="@style/MyNoBar" />
     </application>
 
 </manifest>
