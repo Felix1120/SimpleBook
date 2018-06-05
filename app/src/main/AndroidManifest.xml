@@ -58,6 +58,11 @@
         <activity
             android:name=".activity.MyCenterActivity"
             android:theme="@style/MyNoBar" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:theme="@style/TranslucentTheme" />
+        <activity android:name=".activity.RegisterActivity"
+            android:theme="@style/TranslucentTheme" />
     </application>
 
 </manifest>

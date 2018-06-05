@@ -39,6 +39,8 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     public static final String UPDATE_ACTION = "com.felix.simplebook.update.widget";
 
+    public static final int REQUEST_CODE = 100;
+
     @BindView(R.id.toolbar_activity_home)
     Toolbar mToolbar;
 
@@ -122,8 +124,8 @@ public class HomeActivity extends BaseActivity implements IHomeView {
                         switchFragment(addFragment);
                         break;
                     case R.id.my_center:
-                        startActivity(new Intent(HomeActivity.this,
-                                MyCenterActivity.class));
+                        startActivityForResult(new Intent(HomeActivity.this,
+                                MyCenterActivity.class), REQUEST_CODE);
                         break;
                 }
                 mDrawerLayout.closeDrawers();
@@ -179,12 +181,12 @@ public class HomeActivity extends BaseActivity implements IHomeView {
             transaction
                     .hide(currentFragment)
                     .add(R.id.frame_layout_activity_home, targetFragment)
-                    .commit();
+                    .commitAllowingStateLoss();
         } else {
             transaction
                     .hide(currentFragment)
                     .show(targetFragment)
-                    .commit();
+                    .commitAllowingStateLoss();
         }
         currentFragment = targetFragment;
     }
@@ -210,5 +212,13 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     protected void onResume() {
         super.onResume();
         presenter.query();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CODE && resultCode == MyCenterActivity.RESULT_CODE){
+            mActionButton.setVisibility(View.GONE);
+            switchFragment(backupFragment);
+        }
     }
 }

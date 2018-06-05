@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_register"
+    android:fitsSystemWindows="true">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_activity_register"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/username_activity_register"
+            android:layout_width="250dp"
+            android:layout_height="39dp"
+            android:background="@drawable/et_shape_login"
+            android:gravity="center"
+            android:hint="用  户  名"
+            android:textColor="@color/write_2"
+            android:textColorHint="@color/write_tran" />
+
+        <EditText
+            android:id="@+id/password_activity_register"
+            android:layout_width="250dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/et_shape_login"
+            android:gravity="center"
+            android:hint="密        码"
+            android:textColor="@color/write_2"
+            android:textColorHint="@color/write_tran" />
+
+        <EditText
+            android:id="@+id/re_password_activity_register"
+            android:layout_width="250dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/et_shape_login"
+            android:gravity="center"
+            android:hint="重复密码"
+            android:textColor="@color/write_2"
+            android:textColorHint="@color/write_tran" />
+
+        <EditText
+            android:id="@+id/phone_activity_register"
+            android:layout_width="250dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/et_shape_login"
+            android:gravity="center"
+            android:hint="手        机"
+            android:textColor="@color/write_2"
+            android:textColorHint="@color/write_tran" />
+
+        <EditText
+            android:id="@+id/email_activity_register"
+            android:layout_width="250dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/et_shape_login"
+            android:gravity="center"
+            android:hint="邮        箱"
+            android:textColor="@color/write_2"
+            android:textColorHint="@color/write_tran" />
+
+        <Button
+            android:id="@+id/btn_activity_register"
+            android:layout_width="250dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_ok_shape_register"
+            android:text="注                 册"
+            android:textColor="@color/write_2"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/register_activity_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="已有账号？点此登录"
+            android:textColor="@color/write_2" />
+
+    </LinearLayout>
+</RelativeLayout>

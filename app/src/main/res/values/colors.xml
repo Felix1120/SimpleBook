@@ -12,9 +12,16 @@
     <color name="transparent_black_3">#8A000000</color>
     <color name="transparent">#00000000</color>
     <color name="transparent_bar">#10000000</color>
-    <color name="write_2">#FFFFFFFF</color>
+    <color name="write_2">#FFFFFF</color>
     <color name="write_tran">#5AFEFEFE</color>
     <color name="green_tran">#6A00956e</color>
     <color name="gray">#FF484848</color>
-    <color name="purple">#282f3f</color>
+
+    <!--login color-->
+    <color name="background">#282f3f</color>
+    <color name="button">#576e98</color>
+
+    <!--register color-->
+    <color name="background_register">#6c379f</color>
+    <color name="button_register">#e83970</color>
 </resources>

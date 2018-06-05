@@ -4,6 +4,7 @@ import android.database.Cursor;
 
 import com.felix.simplebook.callback.ICallBacking;
 import com.felix.simplebook.database.InfoBean;
+import com.felix.simplebook.utils.MyLog;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://F:\MyFile\SimpleBook\SBCM.iml" filepath="F:\MyFile\SimpleBook\SBCM.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SimpleBook.iml" filepath="$PROJECT_DIR$/SimpleBook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SBCM.iml" filepath="$PROJECT_DIR$/SBCM.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://F:\MyFile\SimpleBook\app\app.iml" filepath="F:\MyFile\SimpleBook\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
-      <module fileurl="file://F:\MyFile\SimpleBook\library\library.iml" filepath="F:\MyFile\SimpleBook\library\library.iml" />
     </modules>
   </component>
 </project>
