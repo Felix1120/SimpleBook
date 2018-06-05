@@ -39,8 +39,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     public static final String UPDATE_ACTION = "com.felix.simplebook.update.widget";
 
-    public static final int REQUEST_CODE = 100;
-
     @BindView(R.id.toolbar_activity_home)
     Toolbar mToolbar;
 
@@ -85,12 +83,20 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         presenter = new HomePresenter(this, mContext);
 
-        //设置默认界面
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.frame_layout_activity_home, homeFragment)
-                .commit();
-        currentFragment = homeFragment;
+        if (getIntent().getAction() != null && getIntent().getAction().equals("center")) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout_activity_home, backupFragment)
+                    .commit();
+            currentFragment = backupFragment;
+        } else {
+            //设置默认界面
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout_activity_home, homeFragment)
+                    .commit();
+            currentFragment = homeFragment;
+        }
         //设置滑动菜单默认选中项
         mNavigationView.setCheckedItem(R.id.my_home);
         //设置监听器
@@ -124,8 +130,8 @@ public class HomeActivity extends BaseActivity implements IHomeView {
                         switchFragment(addFragment);
                         break;
                     case R.id.my_center:
-                        startActivityForResult(new Intent(HomeActivity.this,
-                                MyCenterActivity.class), REQUEST_CODE);
+                        startActivity(new Intent(HomeActivity.this,
+                                MyCenterActivity.class));
                         break;
                 }
                 mDrawerLayout.closeDrawers();
@@ -143,19 +149,13 @@ public class HomeActivity extends BaseActivity implements IHomeView {
             }
         });
 
-        if(ContextCompat.checkSelfPermission(HomeActivity.this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(HomeActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(HomeActivity.this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
         presenter.query();
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.toolbar, menu);
-//        return true;
-//    }
 
     @Override
     protected void onDestroy() {
@@ -181,12 +181,12 @@ public class HomeActivity extends BaseActivity implements IHomeView {
             transaction
                     .hide(currentFragment)
                     .add(R.id.frame_layout_activity_home, targetFragment)
-                    .commitAllowingStateLoss();
+                    .commit();
         } else {
             transaction
                     .hide(currentFragment)
                     .show(targetFragment)
-                    .commitAllowingStateLoss();
+                    .commit();
         }
         currentFragment = targetFragment;
     }
@@ -212,13 +212,5 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     protected void onResume() {
         super.onResume();
         presenter.query();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_CODE && resultCode == MyCenterActivity.RESULT_CODE){
-            mActionButton.setVisibility(View.GONE);
-            switchFragment(backupFragment);
-        }
     }
 }

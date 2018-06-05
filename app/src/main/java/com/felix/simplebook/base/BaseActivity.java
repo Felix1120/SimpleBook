@@ -45,17 +45,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
         //强制横屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        //透明化状态栏
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
-            View decorView = getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            decorView.setSystemUiVisibility(option);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
-            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
-            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
-        }
     }
 
     //获取布局
@@ -103,4 +92,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    public void finishAll(){
+        for (Activity activity : list){
+            activity.finish();
+        }
+    }
 }

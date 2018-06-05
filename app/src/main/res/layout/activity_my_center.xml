@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:gravity="center"
-                        android:text="User Name"
+                        android:text="未 登 录"
                         android:textColor="@color/gray"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
-                        android:text="95319605@qq.com"
+                        android:text="登录后才能使用网络备份"
                         android:textColor="#5f5f5f"
                         android:textSize="16sp" />
                 </LinearLayout>

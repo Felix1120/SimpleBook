@@ -50,6 +50,18 @@ public class HomePresenter implements IHomePresenter {
         }, year, month, day);
     }
 
+    @Override
+    public boolean isLogin() {
+        SharedPreferences preferences = context.getSharedPreferences("config.sb",
+                Context.MODE_PRIVATE);
+        String userName = preferences.getString("isLogin", "noLogin");
+        if(userName.equals("noLogin")){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     public void initType(){
         SharedPreferences preferences = context.getSharedPreferences("config.sb",
                 Context.MODE_PRIVATE);

@@ -1,8 +1,6 @@
 package com.felix.simplebook.activity;
 
 
-
-
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -10,13 +8,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.felix.simplebook.R;
 import com.felix.simplebook.base.BaseActivity;
+import com.felix.simplebook.presenter.IMyCenterPresenter;
+import com.felix.simplebook.presenter.MyCenterPresenter;
+import com.felix.simplebook.utils.MyToast;
+import com.felix.simplebook.view.IMyCenterView;
 
 import butterknife.BindView;
 
-public class MyCenterActivity extends BaseActivity {
+public class MyCenterActivity extends BaseActivity implements IMyCenterView{
 
     @BindView(R.id.toolbar_activity_my_center)
     Toolbar mToolbar;
@@ -37,7 +40,7 @@ public class MyCenterActivity extends BaseActivity {
     @BindView(R.id.tv_good_activity_my_center)
     TextView tvGood;
 
-    public static final int RESULT_CODE = 200;
+    private IMyCenterPresenter presenter;
 
     @Override
     public int initLayout() {
@@ -48,7 +51,7 @@ public class MyCenterActivity extends BaseActivity {
     public void initView() {
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
+        if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -56,8 +59,9 @@ public class MyCenterActivity extends BaseActivity {
         tvBackUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(RESULT_CODE, getIntent());
-                finish();
+                startActivity(new Intent(MyCenterActivity.this,
+                        HomeActivity.class).setAction("center"));
+                finishAll();
             }
         });
 
@@ -65,19 +69,32 @@ public class MyCenterActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MyCenterActivity.this,
-                                LockActivity.class));
+                        LockActivity.class));
+            }
+        });
+
+        tvBackUpNet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(presenter.isLogin()){
+
+                }else {
+                    MyToast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MyCenterActivity.this,
+                            LoginActivity.class));
+                }
             }
         });
     }
 
     @Override
     public void initData() {
-
+        presenter = new MyCenterPresenter(this, mContext);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return true;
