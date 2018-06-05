@@ -3,7 +3,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/my_home"
-            android:icon="@drawable/edit"
+            android:icon="@drawable/home"
             android:title="我的首页" />
         <item
             android:id="@+id/manager"
