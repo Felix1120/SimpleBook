@@ -1,7 +1,9 @@
 package com.felix.simplebook.activity;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -19,7 +21,7 @@ import com.felix.simplebook.view.IMyCenterView;
 
 import butterknife.BindView;
 
-public class MyCenterActivity extends BaseActivity implements IMyCenterView{
+public class MyCenterActivity extends BaseActivity implements IMyCenterView {
 
     @BindView(R.id.toolbar_activity_my_center)
     Toolbar mToolbar;
@@ -39,6 +41,10 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView{
     TextView tvUnLock;
     @BindView(R.id.tv_good_activity_my_center)
     TextView tvGood;
+    @BindView(R.id.tv_username_activity_my_center)
+    TextView tvUserName;
+    @BindView(R.id.tv_email_activity_my_center)
+    TextView tvEmail;
 
     private IMyCenterPresenter presenter;
 
@@ -76,9 +82,9 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView{
         tvBackUpNet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(presenter.isLogin()){
+                if (presenter.isLogin()) {
 
-                }else {
+                } else {
                     MyToast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MyCenterActivity.this,
                             LoginActivity.class));
@@ -90,6 +96,19 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView{
     @Override
     public void initData() {
         presenter = new MyCenterPresenter(this, mContext);
+
+        if (("login").equals(getIntent().getStringExtra("who"))) {
+            SharedPreferences preferences = mContext.getSharedPreferences("config.sb",
+                    Context.MODE_PRIVATE);
+//            preferences.edit()
+//                    .putString("username", object.get("user_name").toString())
+//                    .putString("email", object.get("email").toString())
+//                    .putString("photos", object.get("photos").toString())
+//                    .commit();
+
+            tvUserName.setText(preferences.getString("username",""));
+            tvEmail.setText(preferences.getString("email",""));
+        }
     }
 
     @Override
@@ -98,5 +117,11 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView{
             finish();
         }
         return true;
+    }
+
+    public static void startMyActivity(Context context, String who) {
+        Intent intent = new Intent(context, MyCenterActivity.class);
+        intent.putExtra("who", who);
+        context.startActivity(intent);
     }
 }
