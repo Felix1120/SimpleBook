@@ -15,13 +15,16 @@ import android.widget.TextView;
 
 import com.felix.simplebook.R;
 import com.felix.simplebook.base.BaseActivity;
+import com.felix.simplebook.presenter.IRegisterPresenter;
+import com.felix.simplebook.presenter.RegisterPresenter;
+import com.felix.simplebook.view.IRegisterView;
 
 import butterknife.BindView;
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @BindView(R.id.btn_activity_register)
-    Button btnLogin;
+    Button btnRegister;
 
     @BindView(R.id.username_activity_register)
     EditText etUserName;
@@ -29,11 +32,22 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.password_activity_register)
     EditText etPassword;
 
-    @BindView(R.id.register_activity_register)
-    TextView tvRegister;
+    @BindView(R.id.re_password_activity_register)
+    EditText etRePassword;
+
+    @BindView(R.id.phone_activity_register)
+    EditText etPhone;
+
+    @BindView(R.id.email_activity_register)
+    EditText etEmail;
+
+    @BindView(R.id.tv_login_activity_register)
+    TextView tvLogin;
 
     @BindView(R.id.toolbar_activity_register)
     Toolbar mToolbar;
+
+    private IRegisterPresenter presenter;
     @Override
     public int initLayout() {
         return R.layout.activity_register;
@@ -42,6 +56,7 @@ public class RegisterActivity extends BaseActivity {
     @Override
     public void initView() {
         setSupportActionBar(mToolbar);
+        presenter = new RegisterPresenter(RegisterActivity.this, mContext);
 
         ActionBar actionBar = getSupportActionBar();
 
@@ -50,11 +65,20 @@ public class RegisterActivity extends BaseActivity {
             actionBar.setDisplayShowTitleEnabled(false);
         }
 
-        tvRegister.setOnClickListener(new View.OnClickListener() {
+        tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(mContext, LoginActivity.class));
                 finish();
+            }
+        });
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.register(etUserName.getText().toString(), etPassword.getText().toString(),
+                        etRePassword.getText().toString(), etEmail.getText().toString(),
+                        etPhone.getText().toString(), etUserName.getText().toString());
             }
         });
 

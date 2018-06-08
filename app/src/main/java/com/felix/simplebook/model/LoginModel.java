@@ -34,7 +34,6 @@ public class LoginModel implements ILoginModel {
                     .build();
 
             Call call = client.newCall(request);
-            //Response response = call.execute();
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {

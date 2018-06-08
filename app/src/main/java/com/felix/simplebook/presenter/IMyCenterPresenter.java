@@ -6,4 +6,5 @@ package com.felix.simplebook.presenter;
 
 public interface IMyCenterPresenter {
     boolean isLogin();
+    boolean exitLogin();
 }

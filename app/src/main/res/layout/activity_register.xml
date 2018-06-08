@@ -84,7 +84,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/register_activity_register"
+            android:id="@+id/tv_login_activity_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"

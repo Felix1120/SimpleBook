@@ -35,4 +35,18 @@ public class MyCenterPresenter implements IMyCenterPresenter {
             return true;
         }
     }
+
+    @Override
+    public boolean exitLogin() {
+        //清除登录信息
+        SharedPreferences preferences = context.getSharedPreferences("config.sb",
+                Context.MODE_PRIVATE);
+        boolean commit = preferences.edit()
+                .putString("username", "未登录")
+                .putString("email", "登录后才能使用网络备份")
+                .putString("photos", "")
+                .putString("isLogin", "noLogin")
+                .commit();
+        return commit;
+    }
 }

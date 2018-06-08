@@ -36,6 +36,7 @@
             android:background="@drawable/et_shape_login"
             android:gravity="center"
             android:hint="密    码"
+            android:inputType="textPassword"
             android:textColor="@color/write_2"
             android:textColorHint="@color/write_tran" />
 

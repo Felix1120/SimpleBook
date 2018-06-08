@@ -64,6 +64,7 @@ public class LoginPresenter implements ILoginPresenter {
                                 .putString("username", object.get("user_name").toString())
                                 .putString("email", object.get("email").toString())
                                 .putString("photos", object.get("photos").toString())
+                                .putString("isLogin","Login")
                                 .commit();
                         loginView.showMessage("登录成功");
                         loginView.close();

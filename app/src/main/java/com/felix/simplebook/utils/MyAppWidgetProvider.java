@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.RemoteViews;
 
 import com.felix.simplebook.R;
+import com.felix.simplebook.activity.HomeShowActivity;
 import com.felix.simplebook.activity.StartActivity;
 import com.felix.simplebook.service.WidgetService;
 
@@ -19,6 +20,7 @@ import com.felix.simplebook.service.WidgetService;
 
 public class MyAppWidgetProvider extends AppWidgetProvider {
     public static final String CLICK_ACTION = "com.felix.simplebook.click";
+    private Intent serviceIntent;
 
     public MyAppWidgetProvider() {
         super();
@@ -30,7 +32,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
         MyLog.info("onReceive...", intent.getAction());
         if (intent.getAction().equals(CLICK_ACTION)) {
             MyLog.info("Click...");
-            context.startActivity(new Intent(context, StartActivity.class));
+            context.startActivity(new Intent(context, HomeShowActivity.class));
         }
     }
 
@@ -40,7 +42,8 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
         for (int i = 0; i < appWidgetIds.length; i++) {
             onWidgetUpdate(context, appWidgetManager, appWidgetIds[i]);
         }
-        context.startService(new Intent(context, WidgetService.class));
+        serviceIntent = new Intent(context, WidgetService.class);
+        context.startService(serviceIntent);
     }
 
     //更新桌面小部件
@@ -53,6 +56,12 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         remoteViews.setOnClickPendingIntent(R.id.rl_content_home_widget, pendingIntent);
         appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
+    }
+
+    @Override
+    public void onDisabled(Context context) {
+        super.onDisabled(context);
+        context.stopService(serviceIntent);
     }
 }
 

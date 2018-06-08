@@ -38,4 +38,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile project(':library')
     compile files('F:/Astudio/SimpleBook/libs/jxl.jar')
+    compile files('F:/MyFile/SimpleBook/libs/jxl.jar')
 }

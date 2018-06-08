@@ -144,6 +144,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public void close() {
-        finishAll();
+        finish();
     }
 }

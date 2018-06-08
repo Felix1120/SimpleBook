@@ -91,24 +91,32 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
                 }
             }
         });
+
+        mOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(presenter.isLogin()){
+                    if(presenter.exitLogin()){
+                        MyToast.makeText(mContext, "已退出登录", Toast.LENGTH_SHORT).show();
+                        tvUserName.setText("未登录");
+                        tvEmail.setText("登录后才能使用网络备份");
+                    }else {
+                        MyToast.makeText(mContext, "退出失败", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    MyToast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
     public void initData() {
         presenter = new MyCenterPresenter(this, mContext);
-
-        if (("login").equals(getIntent().getStringExtra("who"))) {
-            SharedPreferences preferences = mContext.getSharedPreferences("config.sb",
+        SharedPreferences preferences = mContext.getSharedPreferences("config.sb",
                     Context.MODE_PRIVATE);
-//            preferences.edit()
-//                    .putString("username", object.get("user_name").toString())
-//                    .putString("email", object.get("email").toString())
-//                    .putString("photos", object.get("photos").toString())
-//                    .commit();
-
-            tvUserName.setText(preferences.getString("username",""));
-            tvEmail.setText(preferences.getString("email",""));
-        }
+        tvUserName.setText(preferences.getString("username","未登录"));
+        tvEmail.setText(preferences.getString("email","登录后才能使用网络备份"));
     }
 
     @Override
