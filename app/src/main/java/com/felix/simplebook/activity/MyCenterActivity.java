@@ -4,6 +4,7 @@ package com.felix.simplebook.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -18,6 +19,11 @@ import com.felix.simplebook.presenter.IMyCenterPresenter;
 import com.felix.simplebook.presenter.MyCenterPresenter;
 import com.felix.simplebook.utils.MyToast;
 import com.felix.simplebook.view.IMyCenterView;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.engine.impl.GlideEngine;
+import com.zhihu.matisse.filter.Filter;
+import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import butterknife.BindView;
 
@@ -95,15 +101,15 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
         mOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(presenter.isLogin()){
-                    if(presenter.exitLogin()){
+                if (presenter.isLogin()) {
+                    if (presenter.exitLogin()) {
                         MyToast.makeText(mContext, "已退出登录", Toast.LENGTH_SHORT).show();
                         tvUserName.setText("未登录");
                         tvEmail.setText("登录后才能使用网络备份");
-                    }else {
+                    } else {
                         MyToast.makeText(mContext, "退出失败", Toast.LENGTH_SHORT).show();
                     }
-                }else{
+                } else {
                     MyToast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
                 }
             }
