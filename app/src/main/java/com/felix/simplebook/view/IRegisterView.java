@@ -5,4 +5,7 @@ package com.felix.simplebook.view;
  */
 
 public interface IRegisterView {
+    void showMessage(String msg);
+    void showLoading();
+    void closeLoading();
 }

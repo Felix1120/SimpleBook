@@ -15,21 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.felix.simplebook.R;
 import com.felix.simplebook.base.BaseActivity;
 import com.felix.simplebook.presenter.IMyCenterPresenter;
 import com.felix.simplebook.presenter.MyCenterPresenter;
-import com.felix.simplebook.utils.MyLog;
 import com.felix.simplebook.utils.MyToast;
 import com.felix.simplebook.view.IMyCenterView;
-import com.yalantis.ucrop.UCrop;
-import com.zhihu.matisse.Matisse;
-import com.zhihu.matisse.MimeType;
-import com.zhihu.matisse.engine.impl.GlideEngine;
-import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -59,7 +51,7 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
     TextView tvEmail;
 
     private IMyCenterPresenter presenter;
-    private final static int REQUEST_CODE_CHOOSE = 10;
+    private SharedPreferences preferences;
 
     @Override
     public int initLayout() {
@@ -125,29 +117,25 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
         mPhotos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Matisse.from(MyCenterActivity.this)
-                        .choose(MimeType.allOf())
-                        .countable(true)
-                        .maxSelectable(1)
-                        .capture(true)
-                        .captureStrategy(new CaptureStrategy(true, "com.felix.simplebook.fileprovider"))
-                        .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
-                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                        .thumbnailScale(0.85f)
-                        .theme(R.style.My_Style)
-                        .imageEngine(new GlideEngine())
-                        .forResult(REQUEST_CODE_CHOOSE);
+                if(presenter.isLogin()) {
+                    presenter.selectImg(MyCenterActivity.this);
+                }else{
+                    MyToast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
     @Override
     public void initData() {
-        presenter = new MyCenterPresenter(this, mContext);
-        SharedPreferences preferences = mContext.getSharedPreferences("config.sb",
+        presenter = new MyCenterPresenter(this, MyCenterActivity.this);
+        preferences = mContext.getSharedPreferences("config.sb",
                     Context.MODE_PRIVATE);
         tvUserName.setText(preferences.getString("username","未登录"));
         tvEmail.setText(preferences.getString("email","登录后才能使用网络备份"));
+        if(presenter.isLogin()){
+            
+        }
     }
 
     @Override
@@ -163,32 +151,9 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
         intent.putExtra("who", who);
         context.startActivity(intent);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        MyLog.info("requestCode", requestCode + "   resultCode" + resultCode);
-        if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
-            List<Uri> lists = Matisse.obtainResult(data);
-            MyLog.info(lists.get(0).toString());
-            // mPhotos.setImageURI(lists.get(0));
-            Uri saveUri = Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath() + "/test.jpg");
-            MyLog.info(saveUri.toString());
-            UCrop.of(lists.get(0), saveUri)
-                    .withAspectRatio(1, 1)
-                    .withMaxResultSize(mPhotos.getMaxWidth(), mPhotos.getMaxHeight())
-                    .start(MyCenterActivity.this);
-
-        } else if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
-            Uri resultUri = UCrop.getOutput(data);
-            MyLog.info("resultUri", resultUri.toString());
-            Glide.clear(mPhotos);
-            Glide.with(MyCenterActivity.this)
-                    .load(resultUri)
-                    .into(mPhotos);
-        } else if (resultCode == UCrop.RESULT_ERROR) {
-            Throwable cropError = UCrop.getError(data);
-            MyLog.info(cropError.getMessage());
-        }
+        presenter.activityResult(requestCode, resultCode, data, mPhotos);
     }
 }

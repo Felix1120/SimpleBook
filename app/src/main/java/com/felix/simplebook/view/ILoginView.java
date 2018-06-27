@@ -11,4 +11,6 @@ import com.felix.simplebook.base.BaseActivity;
 public interface ILoginView {
     void showMessage(String msg);
     void close();
+    void showLoading();
+    void closeLoading();
 }

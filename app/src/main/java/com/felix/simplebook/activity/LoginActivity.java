@@ -13,8 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +49,9 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @BindView(R.id.toolbar_activity_login)
     Toolbar mToolbar;
 
+    @BindView(R.id.img_loading_activity_login)
+    ImageView imgLoading;
+
     private LoginPresenter loginPresenter;
 
     private MyHandler myHandler = new MyHandler(this);
@@ -64,6 +70,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             MyToast.makeText(weakReference.get(), msg.obj.toString(), Toast.LENGTH_SHORT).show();
+            closeLoading();
         }
     }
 
@@ -145,5 +152,30 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Override
     public void close() {
         finish();
+    }
+
+    @Override
+    public void showLoading() {
+        imgLoading.setVisibility(View.VISIBLE);
+        btnLogin.setText("登       录       中");
+        btnLogin.setEnabled(false);
+        etPassword.setEnabled(false);
+        etUserName.setEnabled(false);
+        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.loading);
+        imgLoading.startAnimation(animation);
+        tvRegister.setEnabled(false);
+        tvRegister.setTextColor(getResources().getColor(R.color.gray));
+    }
+
+    @Override
+    public void closeLoading() {
+        imgLoading.clearAnimation();
+        imgLoading.setVisibility(View.GONE);
+        btnLogin.setText("登                 录");
+        btnLogin.setEnabled(true);
+        etPassword.setEnabled(true);
+        etUserName.setEnabled(true);
+        tvRegister.setEnabled(true);
+        tvRegister.setTextColor(getResources().getColor(R.color.write_2));
     }
 }

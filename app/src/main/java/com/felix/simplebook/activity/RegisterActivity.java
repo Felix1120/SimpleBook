@@ -1,9 +1,12 @@
 package com.felix.simplebook.activity;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -12,12 +15,16 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.felix.simplebook.R;
 import com.felix.simplebook.base.BaseActivity;
 import com.felix.simplebook.presenter.IRegisterPresenter;
 import com.felix.simplebook.presenter.RegisterPresenter;
+import com.felix.simplebook.utils.MyToast;
 import com.felix.simplebook.view.IRegisterView;
+
+import java.lang.ref.WeakReference;
 
 import butterknife.BindView;
 
@@ -46,6 +53,22 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @BindView(R.id.toolbar_activity_register)
     Toolbar mToolbar;
+
+    private MyHandler myHandler = new MyHandler(this);
+
+    private class MyHandler extends Handler {
+        WeakReference<Activity> weakReference;
+
+        public MyHandler(Activity activity) {
+            weakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            MyToast.makeText(weakReference.get(), msg.obj.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private IRegisterPresenter presenter;
     @Override
@@ -106,5 +129,22 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showMessage(String msg) {
+        Message message = Message.obtain();
+        message.obj = msg;
+        myHandler.sendMessage(message);
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void closeLoading() {
+
     }
 }

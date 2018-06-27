@@ -49,6 +49,7 @@ public class LoginPresenter implements ILoginPresenter {
             loginView.showMessage("密码不能为空");
             return;
         }
+        loginView.showLoading();
         loginModel.Login(new ICallBack<String>() {
             @Override
             public void successful(String s) {
@@ -68,6 +69,7 @@ public class LoginPresenter implements ILoginPresenter {
                                 .commit();
                         loginView.showMessage("登录成功");
                         loginView.close();
+                        loginView.closeLoading();
                         MyCenterActivity.startMyActivity(context, "login");
                     }
                 } catch (JSONException e) {

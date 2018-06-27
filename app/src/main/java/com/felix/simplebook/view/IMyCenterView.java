@@ -7,4 +7,5 @@ import android.content.Context;
  */
 
 public interface IMyCenterView {
+    final static int REQUEST_CODE_CHOOSE = 10;
 }
