@@ -23,6 +23,6 @@
     <color name="button">#576e98</color>
 
     <!--register color-->
-    <color name="background_register">#6c379f</color>
+    <color name="background_register">#484848</color>
     <color name="button_register">#e83970</color>
 </resources>

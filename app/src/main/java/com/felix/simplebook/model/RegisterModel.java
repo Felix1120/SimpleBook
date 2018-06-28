@@ -37,13 +37,12 @@ public class RegisterModel implements IRegisterModel {
             mCall.enqueue(new Callback() {
                               @Override
                               public void onFailure(Call call, IOException e) {
-                                  callBack.error("服务器连接失败");
+                                  callBack.error("亲，没网络我找不到服务器啊");
                               }
 
                               @Override
                               public void onResponse(Call call, Response response) throws IOException {
                                   callBack.successful(response.body().string());
-                                  MyLog.info("RM:", response.body().string());
                               }
                           }
             );

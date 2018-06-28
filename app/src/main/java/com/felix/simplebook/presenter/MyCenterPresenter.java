@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.felix.simplebook.R;
+import com.felix.simplebook.callback.ICallBack;
 import com.felix.simplebook.model.IMyCenterModel;
 import com.felix.simplebook.model.MyCenterModel;
 import com.felix.simplebook.utils.MyLog;
@@ -21,6 +22,8 @@ import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
 import com.zhihu.matisse.internal.entity.CaptureStrategy;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -107,9 +110,40 @@ public class MyCenterPresenter implements IMyCenterPresenter {
                     .skipMemoryCache(true)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(imageView);
+            //start update
+            updateImg(resultUri.getPath());
         } else if (resultCode == UCrop.RESULT_ERROR) {
             Throwable cropError = UCrop.getError(data);
             MyLog.info(cropError.getMessage());
         }
+    }
+
+    @Override
+    public void downloadImg(ImageView imageView, String imgPath) {
+        Glide.with(context)
+                .load("http://120.78.138.94:8080/server/Restore?username=" + imgPath)
+                .skipMemoryCache(false)
+                .into(imageView);
+    }
+
+    private void updateImg(String imagePath) {
+        centerModel.updateImg(new ICallBack<String>() {
+            @Override
+            public void successful(String s) {
+                try {
+                    JSONObject object = new JSONObject(s);
+                    String result = object.getString("result");
+                    MyLog.info("result", result);
+                } catch (Exception e) {
+
+                }
+
+            }
+
+            @Override
+            public void error(String value) {
+
+            }
+        }, imagePath);
     }
 }

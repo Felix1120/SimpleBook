@@ -2,6 +2,7 @@ package com.felix.simplebook.utils;
 
 import android.os.Environment;
 
+import com.felix.simplebook.callback.ICallBack;
 import com.felix.simplebook.database.InfoBean;
 
 import org.json.JSONArray;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class AutoBackUp {
 
-    public void startBackup() {
+    public void startBackup(final ICallBack<Boolean> callBack, final String name) {
         new Thread() {
             @Override
             public void run() {
@@ -26,11 +27,11 @@ public class AutoBackUp {
                 try {
                     String path = Environment.getExternalStorageDirectory().getAbsolutePath();
                     MyLog.info("path:"+path);
-                    File files = new File(path+"/简账");
+                    File files = new File(path + "/SimpleBook");
                     if(!files.exists()){
                         files.mkdirs();
                     }
-                    File file = new File(files.toString(), "自动备份.bu");
+                    File file = new File(files.toString(), name + ".bu");
                     final FileOutputStream fos = new FileOutputStream(file);
                     List<InfoBean> infoBeans = DataSupport.findAll(InfoBean.class);
                     JSONObject json = new JSONObject();
@@ -53,9 +54,15 @@ public class AutoBackUp {
                     fos.write(value.getBytes());
                     fos.flush();
                     fos.close();
+                    if (null != callBack) {
+                        callBack.successful(true);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     MyLog.info(e.toString());
+                    if (null != callBack) {
+                        callBack.successful(false);
+                    }
                 }
             }
         }.start();

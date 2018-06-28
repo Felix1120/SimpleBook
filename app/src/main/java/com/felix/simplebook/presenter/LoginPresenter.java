@@ -42,11 +42,13 @@ public class LoginPresenter implements ILoginPresenter {
     @Override
     public void login(String username, String password) {
         if (username.equals("")) {
-            loginView.showMessage("用户名不能为空");
+            loginView.showMessage(context.getResources()
+                    .getString(R.string.login_username_show));
             return;
         }
         if (password.equals("")) {
-            loginView.showMessage("密码不能为空");
+            loginView.showMessage(context.getResources()
+                    .getString(R.string.login_password_show));
             return;
         }
         loginView.showLoading();
@@ -56,7 +58,8 @@ public class LoginPresenter implements ILoginPresenter {
                 try {
                     JSONObject object = new JSONObject(s);
                     if(object.get("result").equals("fail")){
-                        loginView.showMessage("用户名或密码错误");
+                        loginView.showMessage(context.getResources()
+                                .getString(R.string.login_fail_show));
                     }else if(object.get("result").equals("successful")){
                         //保存登录信息
                         SharedPreferences preferences = context.getSharedPreferences("config.sb",
@@ -64,23 +67,25 @@ public class LoginPresenter implements ILoginPresenter {
                         preferences.edit()
                                 .putString("username", object.get("user_name").toString())
                                 .putString("email", object.get("email").toString())
-                                .putString("photos", object.get("photos").toString())
+                                .putString("photos", object.get("user_name").toString() + ".jpg")
                                 .putString("isLogin","Login")
                                 .commit();
-                        loginView.showMessage("登录成功");
+                        loginView.showMessage(context.getResources()
+                                .getString(R.string.login_success_show));
                         loginView.close();
-                        loginView.closeLoading();
                         MyCenterActivity.startMyActivity(context, "login");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    loginView.showMessage("服务器返回值错误");
+                    loginView.showMessage(context.getResources()
+                            .getString(R.string.login_error_show));
                 }
             }
 
             @Override
             public void error(String value) {
-                loginView.showMessage("服务器请求错误");
+                loginView.showMessage(context.getResources()
+                        .getString(R.string.login_no_inter_show));
             }
         }, username, password);
     }

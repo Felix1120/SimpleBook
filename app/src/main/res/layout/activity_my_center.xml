@@ -91,13 +91,6 @@
                         android:src="@drawable/user_edit" />
 
                     <ImageView
-                        android:id="@+id/img_other_activity_my_center"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/user_other" />
-
-                    <ImageView
                         android:id="@+id/img_out_activity_my_center"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

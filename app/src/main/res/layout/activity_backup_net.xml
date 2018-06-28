@@ -1,7 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/green"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/transparent_black"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="320dp"
+        android:layout_centerInParent="true"
+        android:background="@color/transparent_black"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_up_activity_backup_net"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/btn_edit_shape_dialog"
+            android:text="@string/net_up"
+            android:textColor="@color/write_2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_up"
+            android:textSize="12sp"
+            android:textColor="@color/write" />
+
+        <TextView
+            android:id="@+id/tv_time_up_activity_backup_net"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂无记录"
+            android:textColor="@color/write" />
+
+        <Button
+            android:id="@+id/btn_download_activity_backup_net"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_del_shape_dialog"
+            android:text="@string/net_download"
+            android:textColor="@color/write_2" />
+
+        <TextView
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_download"
+            android:textColor="@color/write" />
+
+        <TextView
+            android:id="@+id/tv_time_download_activity_backup_net"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018.06.28"
+            android:textColor="@color/write" />
+
+        <Button
+            android:id="@+id/btn_back_activity_backup_net"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_back_shape_dialog"
+            android:text="@string/back"
+            android:textColor="@color/green" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_loading_activity_backup_net"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/loading"
+        android:visibility="gone" />
+</RelativeLayout>

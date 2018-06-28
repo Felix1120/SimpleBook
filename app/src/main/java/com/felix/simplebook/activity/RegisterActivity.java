@@ -12,8 +12,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +57,9 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     @BindView(R.id.toolbar_activity_register)
     Toolbar mToolbar;
 
+    @BindView(R.id.img_loading_activity_register)
+    ImageView imgLoading;
+
     private MyHandler myHandler = new MyHandler(this);
 
     private class MyHandler extends Handler {
@@ -67,6 +73,8 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             MyToast.makeText(weakReference.get(), msg.obj.toString(), Toast.LENGTH_SHORT).show();
+            closeLoading();
+
         }
     }
 
@@ -91,8 +99,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(mContext, LoginActivity.class));
-                finish();
+                goLogin();
             }
         });
 
@@ -132,6 +139,12 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     }
 
     @Override
+    public void goLogin() {
+        startActivity(new Intent(mContext, LoginActivity.class));
+        finish();
+    }
+
+    @Override
     public void showMessage(String msg) {
         Message message = Message.obtain();
         message.obj = msg;
@@ -140,11 +153,32 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     public void showLoading() {
-
+        imgLoading.setVisibility(View.VISIBLE);
+        btnRegister.setText("注       册       中");
+        btnRegister.setEnabled(false);
+        etPassword.setEnabled(false);
+        etUserName.setEnabled(false);
+        etRePassword.setEnabled(false);
+        etPhone.setEnabled(false);
+        etEmail.setEnabled(false);
+        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.loading);
+        imgLoading.startAnimation(animation);
+        tvLogin.setEnabled(false);
+        tvLogin.setTextColor(getResources().getColor(R.color.write_tran));
     }
 
     @Override
     public void closeLoading() {
-
+        imgLoading.clearAnimation();
+        imgLoading.setVisibility(View.GONE);
+        btnRegister.setText("注                 册");
+        btnRegister.setEnabled(true);
+        etPassword.setEnabled(true);
+        etUserName.setEnabled(true);
+        etRePassword.setEnabled(true);
+        etPhone.setEnabled(true);
+        etEmail.setEnabled(true);
+        tvLogin.setEnabled(true);
+        tvLogin.setTextColor(getResources().getColor(R.color.write_2));
     }
 }

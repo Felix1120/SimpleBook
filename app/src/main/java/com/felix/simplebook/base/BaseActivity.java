@@ -79,7 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (System.currentTimeMillis() - currentTime < 2000
                 && System.currentTimeMillis() - currentTime > 100) {
             //自动备份数据
-            new AutoBackUp().startBackup();
+            new AutoBackUp().startBackup(null, "自动备份");
 
             for (Activity activity : list){
                 activity.finish();

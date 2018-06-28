@@ -13,4 +13,5 @@ public interface IMyCenterPresenter {
     boolean exitLogin();
     void selectImg(Activity activity);
     void activityResult(int requestCode, int resultCode, Intent data, ImageView imageView);
+    void downloadImg(ImageView imageView, String imgPath);
 }

@@ -19,6 +19,7 @@ import com.felix.simplebook.R;
 import com.felix.simplebook.base.BaseActivity;
 import com.felix.simplebook.presenter.IMyCenterPresenter;
 import com.felix.simplebook.presenter.MyCenterPresenter;
+import com.felix.simplebook.utils.MyLog;
 import com.felix.simplebook.utils.MyToast;
 import com.felix.simplebook.view.IMyCenterView;
 
@@ -33,8 +34,6 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
     ImageView mPhotos;
     @BindView(R.id.img_edit_activity_my_center)
     ImageView mEdit;
-    @BindView(R.id.img_other_activity_my_center)
-    ImageView mOther;
     @BindView(R.id.img_out_activity_my_center)
     ImageView mOut;
     @BindView(R.id.tv_backup_activity_my_center)
@@ -88,9 +87,12 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
             @Override
             public void onClick(View view) {
                 if (presenter.isLogin()) {
-
+                    startActivity(new Intent(MyCenterActivity.this,
+                            BackupNetActivity.class));
                 } else {
-                    MyToast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    MyToast.makeText(mContext, mContext.getResources()
+                                    .getString(R.string.center_go2_login_show),
+                            Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MyCenterActivity.this,
                             LoginActivity.class));
                 }
@@ -102,14 +104,20 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
             public void onClick(View view) {
                 if (presenter.isLogin()) {
                     if (presenter.exitLogin()) {
-                        MyToast.makeText(mContext, "已退出登录", Toast.LENGTH_SHORT).show();
+                        MyToast.makeText(mContext, mContext.getResources()
+                                .getString(R.string.center_out_login_show),
+                                Toast.LENGTH_SHORT).show();
                         tvUserName.setText("未登录");
                         tvEmail.setText("登录后才能使用网络备份");
                     } else {
-                        MyToast.makeText(mContext, "退出失败", Toast.LENGTH_SHORT).show();
+                        MyToast.makeText(mContext, mContext.getResources()
+                                        .getString(R.string.center_out_fail_show),
+                                Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    MyToast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    MyToast.makeText(mContext, mContext.getResources()
+                                    .getString(R.string.center_no_login_show),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -120,7 +128,11 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
                 if(presenter.isLogin()) {
                     presenter.selectImg(MyCenterActivity.this);
                 }else{
-                    MyToast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    MyToast.makeText(mContext, mContext.getResources()
+                                    .getString(R.string.center_go_login_show),
+                            Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MyCenterActivity.this,
+                            LoginActivity.class));
                 }
             }
         });
@@ -134,7 +146,11 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
         tvUserName.setText(preferences.getString("username","未登录"));
         tvEmail.setText(preferences.getString("email","登录后才能使用网络备份"));
         if(presenter.isLogin()){
-            
+            String photos = preferences.getString("photos", "no");
+            if(!"no".equals(photos)){
+                MyLog.info("photos path",photos);
+                presenter.downloadImg(mPhotos, photos);
+            }
         }
     }
 
