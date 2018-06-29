@@ -31,7 +31,7 @@ public class RegisterModel implements IRegisterModel {
                     .add("photos", photos)
                     .build();
             Request request = new Request.Builder()
-                    .url("http://120.78.138.94:8080/server/Register")
+                    .url("http://47.106.219.34:8080/jz_server/Register")
                     .post(body)
                     .build();
             Call mCall = client.newCall(request);

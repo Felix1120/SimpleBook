@@ -121,7 +121,7 @@ public class MyCenterPresenter implements IMyCenterPresenter {
     @Override
     public void downloadImg(ImageView imageView, String imgPath) {
         Glide.with(context)
-                .load("http://120.78.138.94:8080/server/Restore?username=" + imgPath)
+                .load("http://47.106.219.34:8080/jz_server/Restore?username=" + imgPath)
                 .skipMemoryCache(false)
                 .into(imageView);
     }

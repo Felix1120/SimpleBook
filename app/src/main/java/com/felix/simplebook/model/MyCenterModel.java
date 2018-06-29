@@ -32,7 +32,7 @@ public class MyCenterModel implements IMyCenterModel {
 
 
         Request request = new Request.Builder()
-                .url("http://120.78.138.94:8080/server/BackUp")
+                .url("http://47.106.219.34:8080/jz_server/BackUp")
                 .post(build)
                 .build();
 

@@ -25,10 +25,4 @@ public class MyTools {
         }
         return lists;
     }
-
-    //保存用户名
-    public static String userName = "";
-    public static void saveUserName(String name){
-        userName = name;
-    }
 }
