@@ -5,6 +5,6 @@ package com.felix.simplebook.presenter;
  */
 
 public interface IRegisterPresenter {
-    void register(String username, String password, String rePassword,
-                  String email, String phone, String photos);
+    void register(String code, String username, String password,
+                  String rePassword, String email, String phone, String photos);
 }

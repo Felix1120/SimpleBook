@@ -1,6 +1,7 @@
 package com.felix.simplebook.activity;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -34,10 +35,10 @@ public class BackupNetActivity extends BaseActivity implements IBackupNetView {
     @BindView(R.id.btn_up_activity_backup_net)
     Button btnBackup;
 
-    @BindView(R.id.tv_time_download_activity_backup_net)
+    @BindView(R.id.tv_time_up_activity_backup_net)
     TextView tvTimeBackup;
 
-    @BindView(R.id.tv_time_up_activity_backup_net)
+    @BindView(R.id.tv_time_download_activity_backup_net)
     TextView tvTimeRestore;
 
     @BindView(R.id.img_loading_activity_backup_net)
@@ -58,9 +59,13 @@ public class BackupNetActivity extends BaseActivity implements IBackupNetView {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            MyToast.makeText(weakReference.get(), msg.obj.toString(), Toast.LENGTH_SHORT)
-                    .show();
-            closeLoading();
+            if(msg.what == 1){
+                MyToast.makeText(weakReference.get(), msg.obj.toString(), Toast.LENGTH_SHORT)
+                        .show();
+                closeLoading();
+            }else if(msg.what == 9){
+                setMyTime(msg.getData().getString("bTime"), msg.getData().getString("rTime"));
+            }
         }
     }
 
@@ -98,7 +103,7 @@ public class BackupNetActivity extends BaseActivity implements IBackupNetView {
 
     @Override
     public void initData() {
-        //presenter.getTime();
+        presenter.getTime();
     }
 
     @Override
@@ -109,14 +114,20 @@ public class BackupNetActivity extends BaseActivity implements IBackupNetView {
 
     @Override
     public void setTime(String bTime, String rTime) {
-        tvTimeBackup.setText(bTime);
-        tvTimeRestore.setText(rTime);
+        Message message = Message.obtain();
+        message.what = 9;
+        Bundle bundle = new Bundle();
+        bundle.putString("bTime", bTime);
+        bundle.putString("rTime", rTime);
+        message.setData(bundle);
+        myHandler.sendMessage(message);
     }
 
     @Override
     public void showMessage(String value) {
         Message message = Message.obtain();
         message.obj = value;
+        message.what = 1;
         myHandler.sendMessage(message);
     }
 
@@ -137,5 +148,10 @@ public class BackupNetActivity extends BaseActivity implements IBackupNetView {
         btnRestore.setEnabled(true);
         imgLoading.clearAnimation();
         imgLoading.setVisibility(View.GONE);
+    }
+
+    private void setMyTime(String bTime, String rTime) {
+        tvTimeBackup.setText(bTime);
+        tvTimeRestore.setText(rTime);
     }
 }

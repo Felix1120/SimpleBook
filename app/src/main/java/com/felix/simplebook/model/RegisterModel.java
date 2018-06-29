@@ -18,11 +18,12 @@ import okhttp3.Response;
 
 public class RegisterModel implements IRegisterModel {
     @Override
-    public void Register(final ICallBack<String> callBack, String username, String password,
+    public void Register(final ICallBack<String> callBack, String code, String username, String password,
                          String email, String phone, String photos) {
         try {
             OkHttpClient client = new OkHttpClient();
             FormBody body = new FormBody.Builder()
+                    .add("code", code)
                     .add("username", username)
                     .add("password", password)
                     .add("email", email)

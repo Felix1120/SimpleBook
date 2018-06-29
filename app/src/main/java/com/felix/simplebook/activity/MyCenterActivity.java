@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.felix.simplebook.R;
 import com.felix.simplebook.base.BaseActivity;
 import com.felix.simplebook.presenter.IMyCenterPresenter;
@@ -107,6 +108,7 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
                         MyToast.makeText(mContext, mContext.getResources()
                                 .getString(R.string.center_out_login_show),
                                 Toast.LENGTH_SHORT).show();
+                        Glide.with(mContext).load(R.drawable.test).into(mPhotos);
                         tvUserName.setText("未登录");
                         tvEmail.setText("登录后才能使用网络备份");
                     } else {
@@ -130,6 +132,24 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
                 }else{
                     MyToast.makeText(mContext, mContext.getResources()
                                     .getString(R.string.center_go_login_show),
+                            Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MyCenterActivity.this,
+                            LoginActivity.class));
+                }
+            }
+        });
+
+        mEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(presenter.isLogin()) {
+                    //start edit activity
+                    MyToast.makeText(mContext, mContext.getResources()
+                                    .getString(R.string.center_no_edit_show),
+                            Toast.LENGTH_SHORT).show();
+                }else{
+                    MyToast.makeText(mContext, mContext.getResources()
+                                    .getString(R.string.center_edit_show),
                             Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MyCenterActivity.this,
                             LoginActivity.class));

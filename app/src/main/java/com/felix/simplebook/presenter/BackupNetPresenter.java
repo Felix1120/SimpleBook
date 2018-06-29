@@ -2,6 +2,7 @@ package com.felix.simplebook.presenter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
 
@@ -42,12 +43,13 @@ public class BackupNetPresenter implements IBackupNetPresenter {
             @Override
             public void successful(String s) {
                 try {
+                    MyLog.info("Time", s);
                     JSONObject object = new JSONObject(s);
                     String restoreTime = object.getString("restore_time");
                     String backupTime = object.getString("backup_time");
                     view.setTime(backupTime, restoreTime);
                 } catch (Exception e) {
-
+                    MyLog.info("Time fail", e.toString());
                 }
             }
 
@@ -103,6 +105,20 @@ public class BackupNetPresenter implements IBackupNetPresenter {
 
     @Override
     public void restore() {
+        view.showLoading();
+        model.restore(new ICallBack<String>() {
+            @Override
+            public void successful(String s) {
+                view.showMessage(s);
+                Intent intent = new Intent("com.felix.simplebook.successful");
+                intent.putExtra("what", "init");
+                mContext.sendBroadcast(intent);
+            }
 
+            @Override
+            public void error(String value) {
+
+            }
+        }, username);
     }
 }

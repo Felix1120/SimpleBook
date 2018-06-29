@@ -137,7 +137,6 @@ public class MyCenterPresenter implements IMyCenterPresenter {
                 } catch (Exception e) {
 
                 }
-
             }
 
             @Override

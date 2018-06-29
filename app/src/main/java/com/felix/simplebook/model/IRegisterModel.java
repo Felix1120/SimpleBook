@@ -7,6 +7,6 @@ import com.felix.simplebook.callback.ICallBack;
  */
 
 public interface IRegisterModel {
-    void Register(ICallBack<String> callBack, String username, String password, String email,
+    void Register(ICallBack<String> callBack, String code, String username, String password, String email,
                   String phone, String photos);
 }

@@ -28,8 +28,14 @@ public class RegisterPresenter implements IRegisterPresenter {
         registerModel = new RegisterModel();
     }
     @Override
-    public void register(String username, String password, String rePassword, String email,
+    public void register(String code, String username, String password, String rePassword, String email,
                          String phone, String photos) {
+        if (code == null || code.equals("")) {
+            MyToast.makeText(mContext, mContext.getResources().getString(R.string.re_code_show),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if(username==null||username.equals("")){
             MyToast.makeText(mContext, mContext.getResources().getString(R.string.re_username_show),
                     Toast.LENGTH_SHORT).show();
@@ -71,6 +77,9 @@ public class RegisterPresenter implements IRegisterPresenter {
                         registerView.showMessage(mContext.getResources()
                                 .getString(R.string.re_success_show));
                         registerView.goLogin();
+                    } else if(object.get("result").equals("error_code")){
+                        registerView.showMessage(mContext.getResources()
+                                .getString(R.string.re_error_code_show));
                     }
                 } catch (Exception e) {
                     registerView.showMessage(mContext.getResources()
@@ -82,6 +91,6 @@ public class RegisterPresenter implements IRegisterPresenter {
             public void error(String value) {
                 registerView.showMessage(value);
             }
-        }, username, password, email, phone, username);
+        }, code, username, password, email, phone, username);
     }
 }

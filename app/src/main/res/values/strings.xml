@@ -70,6 +70,7 @@
     <string name="theme_red">热情红</string>
 
     <!--注册 提示-->
+    <string name="re_code_show">是不是木有邀请码</string>
     <string name="re_username_show">别调皮，用户名是空的</string>
     <string name="re_password_show">别调皮，密码是空的</string>
     <string name="re_passwords_show">两次密码要一样哟</string>
@@ -77,6 +78,7 @@
     <string name="re_email_show">是不是忘了输入邮箱了</string>
     <string name="re_success_show">注册成功,带你登录去</string>
     <string name="re_fail_show">抱歉,服务器可能抽风了</string>
+    <string name="re_error_code_show">邀请码不正确或已被使用</string>
     <string name="re_error_show">呃呃,用户名已存在</string>
 
     <!--登录 提示-->
@@ -93,6 +95,8 @@
     <string name="center_no_login_show">还没登录呢</string>
     <string name="center_go_login_show">登录后才能替换图片呢</string>
     <string name="center_go2_login_show">未登录，不能使用哦</string>
+    <string name="center_edit_show">未登录，请先登录</string>
+    <string name="center_no_edit_show">暂不支持修改用户信息</string>
 
     <!--网络备份-->
     <string name="net_up">备份</string>
@@ -101,6 +105,4 @@
     <string name="time_download">最近一次还原</string>
     <string name="backup_success">数据已安全备份到服务器</string>
     <string name="backup_fail">哦豁，失败了，再试一次</string>
-
-
 </resources>

@@ -1,6 +1,15 @@
 package com.felix.simplebook.model;
 
+import android.database.Cursor;
+
 import com.felix.simplebook.callback.ICallBack;
+import com.felix.simplebook.database.InfoBean;
+import com.felix.simplebook.utils.MyLog;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.litepal.crud.DataSupport;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,8 +38,8 @@ public class BackupNetModel implements IBackupNetModel {
                 .build();
 
         Request request = new Request.Builder()
-                .url("")
-                .put(body)
+                .url("http://120.78.138.94:8080/server/GetTime")
+                .post(body)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -41,7 +50,9 @@ public class BackupNetModel implements IBackupNetModel {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                callBack.successful(response.body().string());
+                String result = response.body().string();
+                callBack.successful(result);
+                MyLog.info("response", result);
             }
         });
     }
@@ -76,7 +87,64 @@ public class BackupNetModel implements IBackupNetModel {
     }
 
     @Override
-    public void restore(ICallBack<String> callBack, String username) {
+    public void restore(final ICallBack<String> callBack, String username) {
+        OkHttpClient client = new OkHttpClient();
 
+        FormBody body = new FormBody.Builder()
+                .add("username", username + ".bu")
+                .build();
+
+        Request request = new Request.Builder()
+                .url("http://120.78.138.94:8080/server/Restore")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    int restoreNumber = 0;
+                    int noRestoreNumber = 0;
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    JSONArray jsonArray = jsonObject.getJSONArray("info");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        long id = object.getLong("id");
+                        String year = object.getString("year");
+                        String month = object.getString("month");
+                        String day = object.getString("day");
+                        String time = object.getString("time");
+                        String money = object.getString("money");
+                        String inOrOut = object.getString("in_or_out");
+                        String type = object.getString("type");
+                        String status = object.getString("status");
+                        InfoBean infoBean = new InfoBean(id, year, month, day, time, type, money, status,
+                                inOrOut);
+                        String sql = "select * from InfoBean where year = ? and month = ? and day = ?" +
+                                "and time = ? and money = ? and inorout = ? and type = ? and status = ?";
+                        Cursor cursor = DataSupport.findBySQL(sql, year, month, day, time, money, inOrOut, type, status);
+                        if (!cursor.moveToNext()) {
+                            if (infoBean.save()) {
+                                restoreNumber++;
+                            } else {
+
+                            }
+                        } else {
+                            noRestoreNumber++;
+                        }
+                        //置空
+                        infoBean = null;
+                    }
+                    callBack.successful(restoreNumber + "条记录还原完成，" + noRestoreNumber + "条记录重复未还原");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

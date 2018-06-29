@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/transparent_black"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@drawable/backup_net_shape"
+    android:layout_width="200dp"
+    android:layout_height="320dp">
 
     <LinearLayout
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="320dp"
         android:layout_centerInParent="true"
-        android:background="@color/transparent_black"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -25,14 +24,14 @@
             android:layout_height="wrap_content"
             android:text="@string/time_up"
             android:textSize="12sp"
-            android:textColor="@color/write" />
+            android:textColor="@color/write_tran" />
 
         <TextView
             android:id="@+id/tv_time_up_activity_backup_net"
             android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="暂无记录"
+            android:text="无网络"
             android:textColor="@color/write" />
 
         <Button
@@ -49,14 +48,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time_download"
-            android:textColor="@color/write" />
+            android:textColor="@color/write_tran" />
 
         <TextView
             android:id="@+id/tv_time_download_activity_backup_net"
             android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2018.06.28"
+            android:text="无网络"
             android:textColor="@color/write" />
 
         <Button

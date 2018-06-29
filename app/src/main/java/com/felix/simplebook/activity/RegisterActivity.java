@@ -60,6 +60,9 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     @BindView(R.id.img_loading_activity_register)
     ImageView imgLoading;
 
+    @BindView(R.id.code_activity_register)
+    EditText etCode;
+
     private MyHandler myHandler = new MyHandler(this);
 
     private class MyHandler extends Handler {
@@ -106,7 +109,8 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.register(etUserName.getText().toString(), etPassword.getText().toString(),
+                presenter.register(etCode.getText().toString(),
+                        etUserName.getText().toString(), etPassword.getText().toString(),
                         etRePassword.getText().toString(), etEmail.getText().toString(),
                         etPhone.getText().toString(), etUserName.getText().toString());
             }
@@ -156,6 +160,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         imgLoading.setVisibility(View.VISIBLE);
         btnRegister.setText("注       册       中");
         btnRegister.setEnabled(false);
+        etCode.setEnabled(false);
         etPassword.setEnabled(false);
         etUserName.setEnabled(false);
         etRePassword.setEnabled(false);
@@ -173,6 +178,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         imgLoading.setVisibility(View.GONE);
         btnRegister.setText("注                 册");
         btnRegister.setEnabled(true);
+        etCode.setEnabled(true);
         etPassword.setEnabled(true);
         etUserName.setEnabled(true);
         etRePassword.setEnabled(true);
