@@ -4,9 +4,7 @@ package com.felix.simplebook.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -23,7 +21,6 @@ import com.felix.simplebook.presenter.MyCenterPresenter;
 import com.felix.simplebook.utils.MyLog;
 import com.felix.simplebook.utils.MyToast;
 import com.felix.simplebook.view.IMyCenterView;
-
 
 import butterknife.BindView;
 
@@ -52,6 +49,7 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
 
     private IMyCenterPresenter presenter;
     private SharedPreferences preferences;
+    private final static int START_LOGIN_REQUEST = 100;
 
     @Override
     public int initLayout() {
@@ -94,9 +92,19 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
                     MyToast.makeText(mContext, mContext.getResources()
                                     .getString(R.string.center_go2_login_show),
                             Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MyCenterActivity.this,
-                            LoginActivity.class));
+                    Intent startLogin = new Intent(MyCenterActivity.this,
+                            LoginActivity.class);
+                    startActivityForResult(startLogin, START_LOGIN_REQUEST);
                 }
+            }
+        });
+
+        tvGood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.coolapk.com/apk/com.felix.simplebook"));
+                startActivity(intent);
             }
         });
 
@@ -133,8 +141,9 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
                     MyToast.makeText(mContext, mContext.getResources()
                                     .getString(R.string.center_go_login_show),
                             Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MyCenterActivity.this,
-                            LoginActivity.class));
+                    Intent startLogin = new Intent(MyCenterActivity.this,
+                            LoginActivity.class);
+                    startActivityForResult(startLogin, START_LOGIN_REQUEST);
                 }
             }
         });
@@ -151,8 +160,9 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
                     MyToast.makeText(mContext, mContext.getResources()
                                     .getString(R.string.center_edit_show),
                             Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MyCenterActivity.this,
-                            LoginActivity.class));
+                    Intent startLogin = new Intent(MyCenterActivity.this,
+                            LoginActivity.class);
+                    startActivityForResult(startLogin, START_LOGIN_REQUEST);
                 }
             }
         });
