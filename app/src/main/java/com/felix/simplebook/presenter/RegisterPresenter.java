@@ -73,13 +73,16 @@ public class RegisterPresenter implements IRegisterPresenter {
                     } else if (object.get("result").equals("fail")) {
                         registerView.showMessage(mContext.getResources()
                                 .getString(R.string.re_fail_show));
+                    } else if(object.get("result").equals("code_error")){
+                        registerView.showMessage(mContext.getResources()
+                                .getString(R.string.re_error_code_show));
+                    } else if(object.get("result").equals("code_fail")){
+                        registerView.showMessage(mContext.getResources()
+                                .getString(R.string.re_fail_code_show));
                     } else if (object.get("result").equals("successful")) {
                         registerView.showMessage(mContext.getResources()
                                 .getString(R.string.re_success_show));
                         registerView.goLogin();
-                    } else if(object.get("result").equals("error_code")){
-                        registerView.showMessage(mContext.getResources()
-                                .getString(R.string.re_error_code_show));
                     }
                 } catch (Exception e) {
                     registerView.showMessage(mContext.getResources()

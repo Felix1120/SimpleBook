@@ -73,7 +73,6 @@ public class LoginPresenter implements ILoginPresenter {
                         loginView.showMessage(context.getResources()
                                 .getString(R.string.login_success_show));
                         loginView.close();
-                        MyCenterActivity.startMyActivity(context, "login");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

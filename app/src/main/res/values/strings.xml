@@ -78,7 +78,8 @@
     <string name="re_email_show">是不是忘了输入邮箱了</string>
     <string name="re_success_show">注册成功,带你登录去</string>
     <string name="re_fail_show">抱歉,服务器可能抽风了</string>
-    <string name="re_error_code_show">邀请码不正确或已被使用</string>
+    <string name="re_error_code_show">亲，邀请码不存在哦</string>
+    <string name="re_fail_code_show">哦噢，邀请码已被使用了</string>
     <string name="re_error_show">呃呃,用户名已存在</string>
 
     <!--登录 提示-->

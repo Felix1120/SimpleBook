@@ -1,12 +1,16 @@
 package com.felix.simplebook.model;
 
+import android.os.Environment;
+
 import com.felix.simplebook.callback.ICallBack;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -45,6 +49,38 @@ public class MyCenterModel implements IMyCenterModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 callBack.successful(response.body().string());
+            }
+        });
+    }
+
+    @Override
+    public void downloadImg(final ICallBack<File> callBack, final String imagePath) {
+        OkHttpClient client = new OkHttpClient();
+
+        FormBody body = new FormBody.Builder()
+                .add("username", imagePath)
+                .build();
+
+        Request request = new Request.Builder()
+                .url("http://47.106.219.34:8080/jz_server/Restore")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SimpleBook";
+                File file = new File(path, imagePath);
+                FileOutputStream fos = new FileOutputStream(file);
+                fos.write(response.body().bytes());
+                fos.flush();
+                fos.close();
+                callBack.successful(file);
             }
         });
     }

@@ -1,10 +1,13 @@
 package com.felix.simplebook.activity;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -21,6 +24,9 @@ import com.felix.simplebook.presenter.MyCenterPresenter;
 import com.felix.simplebook.utils.MyLog;
 import com.felix.simplebook.utils.MyToast;
 import com.felix.simplebook.view.IMyCenterView;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
 
 import butterknife.BindView;
 
@@ -49,7 +55,35 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
 
     private IMyCenterPresenter presenter;
     private SharedPreferences preferences;
-    private final static int START_LOGIN_REQUEST = 100;
+    public final static int START_LOGIN_REQUEST = 100;
+    public final static int SHOW_NET = 1;
+
+    private MyHandler myHandler = new MyHandler(this);
+
+    private class MyHandler extends Handler {
+        private WeakReference<Activity> weakReference;
+
+        public MyHandler(Activity activity) {
+            weakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == SHOW_NET){
+                Glide.with(weakReference.get())
+                        .load((File) msg.obj)
+                        .skipMemoryCache(true)
+                        .into(mPhotos);
+
+//                int width = mPhotos.getDrawable().getBounds().width();
+//                MyLog.info("width:"+width);
+//                if( width == 0){
+//                    showLocalUmg(R.drawable.test);
+//                }
+            }
+        }
+    }
 
     @Override
     public int initLayout() {
@@ -114,7 +148,7 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
                 if (presenter.isLogin()) {
                     if (presenter.exitLogin()) {
                         MyToast.makeText(mContext, mContext.getResources()
-                                .getString(R.string.center_out_login_show),
+                                        .getString(R.string.center_out_login_show),
                                 Toast.LENGTH_SHORT).show();
                         Glide.with(mContext).load(R.drawable.test).into(mPhotos);
                         tvUserName.setText("未登录");
@@ -135,9 +169,9 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
         mPhotos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(presenter.isLogin()) {
+                if (presenter.isLogin()) {
                     presenter.selectImg(MyCenterActivity.this);
-                }else{
+                } else {
                     MyToast.makeText(mContext, mContext.getResources()
                                     .getString(R.string.center_go_login_show),
                             Toast.LENGTH_SHORT).show();
@@ -151,12 +185,12 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
         mEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(presenter.isLogin()) {
+                if (presenter.isLogin()) {
                     //start edit activity
                     MyToast.makeText(mContext, mContext.getResources()
                                     .getString(R.string.center_no_edit_show),
                             Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     MyToast.makeText(mContext, mContext.getResources()
                                     .getString(R.string.center_edit_show),
                             Toast.LENGTH_SHORT).show();
@@ -171,17 +205,7 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
     @Override
     public void initData() {
         presenter = new MyCenterPresenter(this, MyCenterActivity.this);
-        preferences = mContext.getSharedPreferences("config.sb",
-                    Context.MODE_PRIVATE);
-        tvUserName.setText(preferences.getString("username","未登录"));
-        tvEmail.setText(preferences.getString("email","登录后才能使用网络备份"));
-        if(presenter.isLogin()){
-            String photos = preferences.getString("photos", "no");
-            if(!"no".equals(photos)){
-                MyLog.info("photos path",photos);
-                presenter.downloadImg(mPhotos, photos);
-            }
-        }
+        initDataView();
     }
 
     @Override
@@ -192,14 +216,39 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
         return true;
     }
 
-    public static void startMyActivity(Context context, String who) {
-        Intent intent = new Intent(context, MyCenterActivity.class);
-        intent.putExtra("who", who);
-        context.startActivity(intent);
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         presenter.activityResult(requestCode, resultCode, data, mPhotos);
+    }
+
+    @Override
+    public void initDataView() {
+        preferences = mContext.getSharedPreferences("config.sb",
+                Context.MODE_PRIVATE);
+        tvUserName.setText(preferences.getString("username", "未登录"));
+        tvEmail.setText(preferences.getString("email", "登录后才能使用网络备份"));
+        if (presenter.isLogin()) {
+            String photos = preferences.getString("photos", "no");
+            if (!"no".equals(photos)) {
+                MyLog.info("photos path", photos);
+                presenter.downloadImg(mPhotos, photos);
+            }
+        }
+    }
+
+    @Override
+    public void showNetImg(File file) {
+        Message message = Message.obtain();
+        message.what = SHOW_NET;
+        message.obj = file;
+        myHandler.sendMessage(message);
+    }
+
+    public void showLocalUmg(int id) {
+        Glide.with(mContext)
+                .load(id)
+                .skipMemoryCache(true)
+                .into(mPhotos);
     }
 }

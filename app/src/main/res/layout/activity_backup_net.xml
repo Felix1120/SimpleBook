@@ -31,7 +31,7 @@
             android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="无网络"
+            android:text="正在查询"
             android:textColor="@color/write" />
 
         <Button
@@ -55,7 +55,7 @@
             android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="无网络"
+            android:text="正在查询"
             android:textColor="@color/write" />
 
         <Button

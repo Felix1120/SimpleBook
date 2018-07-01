@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.felix.simplebook.R;
+import com.felix.simplebook.activity.MyCenterActivity;
 import com.felix.simplebook.callback.ICallBack;
 import com.felix.simplebook.model.IMyCenterModel;
 import com.felix.simplebook.model.MyCenterModel;
@@ -25,6 +26,7 @@ import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -41,7 +43,7 @@ public class MyCenterPresenter implements IMyCenterPresenter {
     private Context context;
     private SharedPreferences preferences;
 
-    public MyCenterPresenter(IMyCenterView centerView, Context context){
+    public MyCenterPresenter(IMyCenterView centerView, Context context) {
         this.centerView = centerView;
         this.context = context;
         centerModel = new MyCenterModel();
@@ -52,9 +54,9 @@ public class MyCenterPresenter implements IMyCenterPresenter {
     @Override
     public boolean isLogin() {
         String userName = preferences.getString("isLogin", "noLogin");
-        if(userName.equals("noLogin")){
+        if (userName.equals("noLogin")) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
@@ -95,7 +97,7 @@ public class MyCenterPresenter implements IMyCenterPresenter {
             MyLog.info(lists.get(0).toString());
             String username = preferences.getString("username", "error");
             Uri saveUri = Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath()
-                    + "/"+username+".jpg");
+                    + "/" + username + ".jpg");
             MyLog.info(saveUri.toString());
             UCrop.of(lists.get(0), saveUri)
                     .withAspectRatio(1, 1)
@@ -112,6 +114,8 @@ public class MyCenterPresenter implements IMyCenterPresenter {
                     .into(imageView);
             //start update
             updateImg(resultUri.getPath());
+        } else if (requestCode == MyCenterActivity.START_LOGIN_REQUEST) {
+            centerView.initDataView();
         } else if (resultCode == UCrop.RESULT_ERROR) {
             Throwable cropError = UCrop.getError(data);
             MyLog.info(cropError.getMessage());
@@ -119,11 +123,18 @@ public class MyCenterPresenter implements IMyCenterPresenter {
     }
 
     @Override
-    public void downloadImg(ImageView imageView, String imgPath) {
-        Glide.with(context)
-                .load("http://47.106.219.34:8080/jz_server/Restore?username=" + imgPath)
-                .skipMemoryCache(false)
-                .into(imageView);
+    public void downloadImg(final ImageView imageView, String imgPath) {
+        centerModel.downloadImg(new ICallBack<File>() {
+            @Override
+            public void successful(File file) {
+                centerView.showNetImg(file);
+            }
+
+            @Override
+            public void error(String value) {
+
+            }
+        }, imgPath);
     }
 
     private void updateImg(String imagePath) {

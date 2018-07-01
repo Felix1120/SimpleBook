@@ -179,3 +179,5 @@
 
 #Matisse
 -dontwarn com.squareup.picasso.**
+
+-ignorewarnings -keep class * { public private *; }
