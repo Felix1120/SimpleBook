@@ -82,6 +82,13 @@
     <string name="re_fail_code_show">哦噢，邀请码已被使用了</string>
     <string name="re_error_show">呃呃,用户名已存在</string>
 
+    <string name="re_code_format_fail_show">亲，邀请码6位数哦</string>
+    <string name="re_username_format_fail_show">用户名为5到15个字符哦</string>
+    <string name="re_password_format_fail_show">为了安全，密码最少6位哦</string>
+    <string name="re_password_format_fail2_show">呃呃，密码太长了</string>
+    <string name="re_phone_format_fail_show">哎呀，电话号码是不是输错了</string>
+    <string name="re_email_format_fail_show">你确定这是邮箱地址吗</string>
+
     <!--登录 提示-->
     <string name="login_username_show">别调皮，用户名没输入</string>
     <string name="login_password_show">别调皮，密码没输入</string>

@@ -61,7 +61,7 @@ public class NetInfoType {
      * @param context
      * @return
      */
-    public boolean isNetContected(Context context) {
+    public boolean isNetConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
@@ -77,7 +77,7 @@ public class NetInfoType {
      * @param context
      * @return
      */
-    public boolean isWifiContected(Context context) {
+    public boolean isWifiConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -92,8 +92,8 @@ public class NetInfoType {
      *
      * @return
      */
-    public boolean isNetContected() {
-        if (isNetContected(context) || isWifiContected(context)) {
+    public boolean isNetConnected() {
+        if (isNetConnected(context) || isWifiConnected(context)) {
             return true;
         }
         return false;

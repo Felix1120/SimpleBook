@@ -129,7 +129,7 @@ public class MyCenterPresenter implements IMyCenterPresenter {
         File file = new File(Environment.getExternalStorageDirectory()
                 .getAbsolutePath() + "/SimpleBook/" + imgPath);
         NetInfoType netInfoType = new NetInfoType(context);
-        if (!netInfoType.isNetContected()) {
+        if (!netInfoType.isNetConnected()) {
             MyLog.info("no internet , loading local res...");
             if(file.exists()){
                 //load local photos
