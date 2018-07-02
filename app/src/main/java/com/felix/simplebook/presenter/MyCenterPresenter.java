@@ -17,6 +17,7 @@ import com.felix.simplebook.callback.ICallBack;
 import com.felix.simplebook.model.IMyCenterModel;
 import com.felix.simplebook.model.MyCenterModel;
 import com.felix.simplebook.utils.MyLog;
+import com.felix.simplebook.utils.NetInfoType;
 import com.felix.simplebook.view.IMyCenterView;
 import com.yalantis.ucrop.UCrop;
 import com.zhihu.matisse.Matisse;
@@ -124,6 +125,25 @@ public class MyCenterPresenter implements IMyCenterPresenter {
 
     @Override
     public void downloadImg(final ImageView imageView, String imgPath) {
+
+        File file = new File(Environment.getExternalStorageDirectory()
+                .getAbsolutePath() + "/SimpleBook/" + imgPath);
+        NetInfoType netInfoType = new NetInfoType(context);
+        if (!netInfoType.isNetContected()) {
+            MyLog.info("no internet , loading local res...");
+            if(file.exists()){
+                //load local photos
+                MyLog.info("no internet , load local photos...");
+                centerView.showNetImg(file);
+            }else{
+                //load color
+                MyLog.info("no internet , load color...");
+                //centerView.showLocalUmg(R.color.colorPrimary);
+            }
+            return;
+
+        }
+
         centerModel.downloadImg(new ICallBack<File>() {
             @Override
             public void successful(File file) {
@@ -132,7 +152,7 @@ public class MyCenterPresenter implements IMyCenterPresenter {
 
             @Override
             public void error(String value) {
-
+                centerView.showLocalUmg(R.color.colorPrimary);
             }
         }, imgPath);
     }

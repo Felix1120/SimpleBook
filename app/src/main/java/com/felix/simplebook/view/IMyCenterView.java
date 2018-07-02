@@ -12,4 +12,5 @@ public interface IMyCenterView {
     final static int REQUEST_CODE_CHOOSE = 10;
     void initDataView();
     void showNetImg(File file);
+    void showLocalUmg(int id);
 }

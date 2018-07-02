@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.felix.simplebook.R;
 import com.felix.simplebook.base.BaseActivity;
 import com.felix.simplebook.presenter.IMyCenterPresenter;
@@ -71,16 +72,16 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if(msg.what == SHOW_NET){
-                Glide.with(weakReference.get())
-                        .load((File) msg.obj)
-                        .skipMemoryCache(true)
-                        .into(mPhotos);
-
-//                int width = mPhotos.getDrawable().getBounds().width();
-//                MyLog.info("width:"+width);
-//                if( width == 0){
-//                    showLocalUmg(R.drawable.test);
-//                }
+                File file = (File) msg.obj;
+                if (file.length() == 0) {
+                    showLocalUmg(R.color.colorPrimary);
+                } else {
+                    Glide.with(weakReference.get())
+                            .load(file)
+                            .skipMemoryCache(true)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .into(mPhotos);
+                }
             }
         }
     }
@@ -206,6 +207,9 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
     public void initData() {
         presenter = new MyCenterPresenter(this, MyCenterActivity.this);
         initDataView();
+        if (!presenter.isLogin()) {
+            showLocalUmg(R.color.colorPrimary);
+        }
     }
 
     @Override
@@ -245,10 +249,8 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
         myHandler.sendMessage(message);
     }
 
+    @Override
     public void showLocalUmg(int id) {
-        Glide.with(mContext)
-                .load(id)
-                .skipMemoryCache(true)
-                .into(mPhotos);
+        mPhotos.setBackgroundColor(id);
     }
 }
