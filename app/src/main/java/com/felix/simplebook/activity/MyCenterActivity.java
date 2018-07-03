@@ -151,7 +151,7 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
                         MyToast.makeText(mContext, mContext.getResources()
                                         .getString(R.string.center_out_login_show),
                                 Toast.LENGTH_SHORT).show();
-                        Glide.with(mContext).load(R.drawable.test).into(mPhotos);
+                        showLocalUmg(R.color.colorPrimary);
                         tvUserName.setText("未登录");
                         tvEmail.setText("登录后才能使用网络备份");
                     } else {

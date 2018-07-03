@@ -152,17 +152,11 @@
 }
 -keepclassmembers class * extends org.litepal.crud.DataSupport{*;}
 
-#retrofit2
--dontwarn retrofit2.**
--keep class retrofit2.** { *; }
--keepattributes Signature
--keepattributes Exceptions
-
-#okhttp3
--dontwarn okhttp3.**
--dontwarn okio.**
+#okhttp
 -dontwarn javax.annotation.**
--dontwarn org.conscrypt.**
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
 
 #glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
@@ -179,5 +173,3 @@
 
 #Matisse
 -dontwarn com.squareup.picasso.**
-
--ignorewarnings -keep class * { public private *; }
