@@ -110,6 +110,7 @@ public class BackupNetActivity extends BaseActivity implements IBackupNetView {
     protected void onDestroy() {
         super.onDestroy();
         bind.unbind();
+        myHandler.removeCallbacks(null);
     }
 
     @Override

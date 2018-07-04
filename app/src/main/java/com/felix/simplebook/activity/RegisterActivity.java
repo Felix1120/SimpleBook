@@ -187,4 +187,10 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         tvLogin.setEnabled(true);
         tvLogin.setTextColor(getResources().getColor(R.color.write_2));
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myHandler.removeCallbacks(null);
+    }
 }

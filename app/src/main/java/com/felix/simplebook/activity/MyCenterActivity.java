@@ -253,4 +253,10 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
     public void showLocalUmg(int id) {
         mPhotos.setBackgroundColor(id);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myHandler.removeCallbacks(null);
+    }
 }

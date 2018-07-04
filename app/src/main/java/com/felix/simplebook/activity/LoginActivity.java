@@ -132,6 +132,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     protected void onDestroy() {
         super.onDestroy();
         bind.unbind();
+        myHandler.removeCallbacks(null);
     }
 
     @Override
