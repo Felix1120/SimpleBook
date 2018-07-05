@@ -12,6 +12,7 @@ import com.felix.simplebook.model.BackupNetModel;
 import com.felix.simplebook.model.IBackupNetModel;
 import com.felix.simplebook.utils.AutoBackUp;
 import com.felix.simplebook.utils.MyLog;
+import com.felix.simplebook.utils.NetInfoType;
 import com.felix.simplebook.view.IBackupNetView;
 
 import org.json.JSONObject;
@@ -39,6 +40,11 @@ public class BackupNetPresenter implements IBackupNetPresenter {
 
     @Override
     public void getTime() {
+        NetInfoType infoType = new NetInfoType(mContext);
+        if(!infoType.isNetConnected()){
+            view.setTime("请连接网络", "请连接网络");
+            return;
+        }
         model.getTime(new ICallBack<String>() {
             @Override
             public void successful(String s) {

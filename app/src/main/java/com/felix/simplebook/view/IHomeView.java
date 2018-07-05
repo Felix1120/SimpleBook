@@ -6,4 +6,5 @@ package com.felix.simplebook.view;
 
 public interface IHomeView {
     void setQueryResult(String[] strings);
+    void startUpdateActivity(String serverVersion, String messageBody);
 }

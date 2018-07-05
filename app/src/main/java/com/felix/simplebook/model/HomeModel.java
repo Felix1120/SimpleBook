@@ -5,11 +5,22 @@ import com.felix.simplebook.database.InfoBean;
 import com.felix.simplebook.database.MyDataBase;
 import com.felix.simplebook.utils.MyLog;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by chaofei.xue on 2018/1/2.
@@ -67,5 +78,37 @@ public class HomeModel implements IHomeModel {
 
             }
         }, "select * from InfoBean where year = ? and month = ?", year, month);
+    }
+
+    @Override
+    public void checkApkVersion(final Observer<String> observer) {
+        Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
+
+            @Override
+            public void subscribe(final ObservableEmitter<String> e) throws Exception {
+                OkHttpClient client = new OkHttpClient();
+
+                final Request request = new Request.Builder()
+                        .url("")
+                        .build();
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        e.onNext(response.body().string());
+                        e.onComplete();
+                    }
+                });
+            }
+        });
+
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
     }
 }

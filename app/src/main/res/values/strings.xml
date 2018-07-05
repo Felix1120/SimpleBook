@@ -113,4 +113,12 @@
     <string name="time_download">最近一次还原</string>
     <string name="backup_success">数据已安全备份到服务器</string>
     <string name="backup_fail">哦豁，失败了，再试一次</string>
+
+    <!--更新界面-->
+    <string name="title_activity_update">您有一条新消息</string>
+    <string name="cancel_activity_update">不再提示</string>
+    <string name="local_activity_update">当前版本：</string>
+    <string name="server_activity_update">最新版本：</string>
+    <string name="download_activity_update">下载更新</string>
+    <string name="cool_download_activity_update">酷安更新</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.felix.simplebook.activity;
 
 import android.Manifest;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.felix.simplebook.R;
 import com.felix.simplebook.base.BaseActivity;
@@ -48,14 +46,10 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     @BindView(R.id.fab_activity_home)
     FloatingActionButton mActionButton;
 
-    @BindView(R.id.frame_layout_activity_home)
-    FrameLayout mFrameLayout;
-
     @BindView(R.id.nav_activity_home)
     NavigationView mNavigationView;
 
     private Fragment currentFragment;
-    private ManagerFragment managerFragment;
     private HomeFragment homeFragment;
     private BackupFragment backupFragment;
     private AddFragment addFragment;
@@ -77,7 +71,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
             actionBar.setHomeAsUpIndicator(R.drawable.menu);
         }
         homeFragment = new HomeFragment();
-        managerFragment = new ManagerFragment();
         backupFragment = new BackupFragment();
         addFragment = new AddFragment();
 
@@ -156,6 +149,9 @@ public class HomeActivity extends BaseActivity implements IHomeView {
                     ,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
         presenter.query();
+
+        //test
+        startUpdateActivity("1.5.7", "1.This is a test Messages!");
     }
 
     @Override
@@ -169,9 +165,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         //给标题栏的按钮添加监听事件
         if (item.getItemId() == android.R.id.home) {
             mDrawerLayout.openDrawer(GravityCompat.START);
-        }// else if (item.getItemId() == R.id.score) {
-//            Toast.makeText(mContext, "满分好评", Toast.LENGTH_SHORT).show();
-//        }
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -207,6 +201,15 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         intent.setAction(UPDATE_ACTION);
         MyLog.info("HomeActivity 广播准备发送");
         mContext.sendBroadcast(intent);
+    }
+
+    //show info activity
+    @Override
+    public void startUpdateActivity(String serverVersion, String messageBody) {
+        Intent intent = new Intent(mContext, UpdateActivity.class);
+        intent.putExtra("serverVersion", serverVersion);
+        intent.putExtra("messageBody", messageBody);
+        startActivity(intent);
     }
 
     @Override

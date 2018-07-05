@@ -6,5 +6,5 @@ package com.felix.simplebook.presenter;
 
 public interface IHomePresenter {
     void query();
-    boolean isLogin();
+    void checkApkVersion();
 }

@@ -191,6 +191,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        bind.unbind();
         myHandler.removeCallbacks(null);
     }
 }

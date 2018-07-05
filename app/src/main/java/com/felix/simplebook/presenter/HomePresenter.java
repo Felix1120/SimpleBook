@@ -8,8 +8,14 @@ import com.felix.simplebook.callback.ICallBack;
 import com.felix.simplebook.database.TypeBean;
 import com.felix.simplebook.model.HomeModel;
 import com.felix.simplebook.model.IHomeModel;
+import com.felix.simplebook.utils.ApkVersionUtils;
 import com.felix.simplebook.utils.GetTime;
 import com.felix.simplebook.view.IHomeView;
+
+import org.json.JSONObject;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by chaofei.xue on 2018/1/2.
@@ -51,15 +57,51 @@ public class HomePresenter implements IHomePresenter {
     }
 
     @Override
-    public boolean isLogin() {
-        SharedPreferences preferences = context.getSharedPreferences("config.sb",
-                Context.MODE_PRIVATE);
-        String userName = preferences.getString("isLogin", "noLogin");
-        if(userName.equals("noLogin")){
-            return false;
-        }else{
-            return true;
-        }
+    public void checkApkVersion() {
+        homeModel.checkApkVersion(new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                try {
+                    JSONObject object = new JSONObject(s);
+                    String apkVersion = object.getString("apkVersion");
+                    String messageId = object.getString("messageId");
+                    String messageBody = object.getString("messageBody");
+
+                    String localVersion = ApkVersionUtils.getVersionName(context);
+
+                    SharedPreferences preferences = context.getSharedPreferences("config.sb",
+                            Context.MODE_PRIVATE);
+
+                    String localMessageId = preferences.getString("messageId", "");
+                    String updateShow = preferences.getString("update_show", "yes");
+
+                    if (updateShow.equals("no")) {
+                        if (!localVersion.equals(apkVersion) || !messageId.equals(localMessageId)) {
+                            homeView.startUpdateActivity(apkVersion, messageBody);
+                        }
+                    } else {
+                        homeView.startUpdateActivity(apkVersion, messageBody);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 
     public void initType(){

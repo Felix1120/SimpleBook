@@ -257,6 +257,7 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        bind.unbind();
         myHandler.removeCallbacks(null);
     }
 }
