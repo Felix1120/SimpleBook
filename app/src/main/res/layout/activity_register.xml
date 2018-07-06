@@ -26,6 +26,7 @@
             android:background="@drawable/et_shape_login"
             android:gravity="center"
             android:hint="邀  请  码"
+            android:inputType="number"
             android:textColor="@color/write_2"
             android:textColorHint="@color/write_tran" />
 
@@ -33,7 +34,7 @@
             android:id="@+id/username_activity_register"
             android:layout_width="250dp"
             android:layout_height="39dp"
-
+            android:inputType="textVisiblePassword"
             android:layout_marginTop="15dp"
             android:background="@drawable/et_shape_login"
             android:gravity="center"
@@ -48,6 +49,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/et_shape_login"
             android:gravity="center"
+            android:inputType="textPassword"
             android:hint="密        码"
             android:textColor="@color/write_2"
             android:textColorHint="@color/write_tran" />
@@ -60,6 +62,7 @@
             android:background="@drawable/et_shape_login"
             android:gravity="center"
             android:hint="重复密码"
+            android:inputType="textPassword"
             android:textColor="@color/write_2"
             android:textColorHint="@color/write_tran" />
 
@@ -71,6 +74,7 @@
             android:background="@drawable/et_shape_login"
             android:gravity="center"
             android:hint="手        机"
+            android:inputType="number"
             android:textColor="@color/write_2"
             android:textColorHint="@color/write_tran" />
 
@@ -82,6 +86,7 @@
             android:background="@drawable/et_shape_login"
             android:gravity="center"
             android:hint="邮        箱"
+            android:inputType="textCapWords"
             android:textColor="@color/write_2"
             android:textColorHint="@color/write_tran" />
 

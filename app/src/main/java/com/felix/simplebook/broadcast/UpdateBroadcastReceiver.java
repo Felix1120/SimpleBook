@@ -98,7 +98,7 @@ public class UpdateBroadcastReceiver extends BroadcastReceiver {
             context.startActivity(intent);
         } catch (Exception var5) {
             var5.printStackTrace();
-            MyToast.makeText(context, "居然没有安装APK程序...", Toast.LENGTH_SHORT).show();
+            MyToast.makeText(context, "亲，新版本下载完成，请手动安装", Toast.LENGTH_SHORT).show();
         }
     }
 

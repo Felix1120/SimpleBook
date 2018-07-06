@@ -10,6 +10,7 @@ import com.felix.simplebook.model.HomeModel;
 import com.felix.simplebook.model.IHomeModel;
 import com.felix.simplebook.utils.ApkVersionUtils;
 import com.felix.simplebook.utils.GetTime;
+import com.felix.simplebook.utils.MyLog;
 import com.felix.simplebook.utils.NetInfoType;
 import com.felix.simplebook.view.IHomeView;
 
@@ -72,10 +73,11 @@ public class HomePresenter implements IHomePresenter {
             @Override
             public void onNext(String s) {
                 try {
+                    MyLog.info("check version result",s);
                     JSONObject object = new JSONObject(s);
-                    String apkVersion = object.getString("apkVersion");
-                    String messageId = object.getString("messageId");
-                    String messageBody = object.getString("messageBody");
+                    String apkVersion = object.getString("apk_version");
+                    String messageId = object.getString("message_id");
+                    String messageBody = object.getString("message_body");
 
                     String localVersion = ApkVersionUtils.getVersionName(context);
 

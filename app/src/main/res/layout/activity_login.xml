@@ -25,6 +25,7 @@
             android:background="@drawable/et_shape_login"
             android:gravity="center"
             android:hint="用户名"
+            android:inputType="textVisiblePassword"
             android:textColor="@color/write_2"
             android:textColorHint="@color/write_tran" />
 

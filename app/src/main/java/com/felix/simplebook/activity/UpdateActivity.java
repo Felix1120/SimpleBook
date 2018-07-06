@@ -51,6 +51,8 @@ public class UpdateActivity extends BaseActivity implements IUpdateView {
 
         presenter = new UpdatePresenter(this, mContext);
 
+        setFinishOnTouchOutside(true);
+
     }
 
     @Override
@@ -92,7 +94,7 @@ public class UpdateActivity extends BaseActivity implements IUpdateView {
                     finish();
                     break;
                 case R.id.tv_download_activity_update:
-                    presenter.localDownload("http://47.106.219.34:8080/jz_server/Restore?username=SimpleBook.apk");
+                    presenter.localDownload("http://47.106.219.34:8080/jz_server/SimpleBook.apk");
                     break;
                 case R.id.tv_cool_download_activity_update:
                     Intent intent = new Intent(Intent.ACTION_VIEW);
