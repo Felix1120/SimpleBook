@@ -25,6 +25,7 @@ import com.felix.simplebook.fragment.HomeFragment;
 import com.felix.simplebook.fragment.ManagerFragment;
 import com.felix.simplebook.presenter.HomePresenter;
 import com.felix.simplebook.utils.MyLog;
+import com.felix.simplebook.utils.NetInfoType;
 import com.felix.simplebook.view.IHomeView;
 
 import butterknife.BindView;
@@ -151,7 +152,8 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         presenter.query();
 
         //test
-        startUpdateActivity("1.5.7", "1.This is a test Messages!");
+        //startUpdateActivity("1.5.7", "1、添加网络备份功能，更新前请先备份数据!");
+        presenter.checkApkVersion();
     }
 
     @Override

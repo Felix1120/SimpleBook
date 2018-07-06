@@ -89,7 +89,7 @@ public class HomeModel implements IHomeModel {
                 OkHttpClient client = new OkHttpClient();
 
                 final Request request = new Request.Builder()
-                        .url("")
+                        .url("http://47.106.219.34:8080/jz_server/CheckVersion")
                         .build();
 
                 client.newCall(request).enqueue(new Callback() {

@@ -92,7 +92,7 @@ public class UpdateActivity extends BaseActivity implements IUpdateView {
                     finish();
                     break;
                 case R.id.tv_download_activity_update:
-                    presenter.localDownload("http://47.106.219.34:8080/jz_server/Restore?username=SnoopSnitch_2.0.5.apk");
+                    presenter.localDownload("http://47.106.219.34:8080/jz_server/Restore?username=SimpleBook.apk");
                     break;
                 case R.id.tv_cool_download_activity_update:
                     Intent intent = new Intent(Intent.ACTION_VIEW);

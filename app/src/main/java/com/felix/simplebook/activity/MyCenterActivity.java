@@ -74,7 +74,7 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
             if(msg.what == SHOW_NET){
                 File file = (File) msg.obj;
                 if (file.length() == 0) {
-                    showLocalUmg(R.color.colorPrimary);
+                    showLocalUmg();
                 } else {
                     Glide.with(weakReference.get())
                             .load(file)
@@ -151,7 +151,7 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
                         MyToast.makeText(mContext, mContext.getResources()
                                         .getString(R.string.center_out_login_show),
                                 Toast.LENGTH_SHORT).show();
-                        showLocalUmg(R.color.colorPrimary);
+                        showLocalUmg();
                         tvUserName.setText("未登录");
                         tvEmail.setText("登录后才能使用网络备份");
                     } else {
@@ -208,7 +208,7 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
         presenter = new MyCenterPresenter(this, MyCenterActivity.this);
         initDataView();
         if (!presenter.isLogin()) {
-            showLocalUmg(R.color.colorPrimary);
+            showLocalUmg();
         }
     }
 
@@ -250,8 +250,9 @@ public class MyCenterActivity extends BaseActivity implements IMyCenterView {
     }
 
     @Override
-    public void showLocalUmg(int id) {
-        mPhotos.setBackgroundColor(id);
+    public void showLocalUmg() {
+        mPhotos.setImageBitmap(null);
+        mPhotos.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
     }
 
     @Override

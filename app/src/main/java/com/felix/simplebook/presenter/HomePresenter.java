@@ -10,6 +10,7 @@ import com.felix.simplebook.model.HomeModel;
 import com.felix.simplebook.model.IHomeModel;
 import com.felix.simplebook.utils.ApkVersionUtils;
 import com.felix.simplebook.utils.GetTime;
+import com.felix.simplebook.utils.NetInfoType;
 import com.felix.simplebook.view.IHomeView;
 
 import org.json.JSONObject;
@@ -58,6 +59,10 @@ public class HomePresenter implements IHomePresenter {
 
     @Override
     public void checkApkVersion() {
+        NetInfoType type = new NetInfoType(context);
+        if(!type.isNetConnected()){
+            return;
+        }
         homeModel.checkApkVersion(new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {

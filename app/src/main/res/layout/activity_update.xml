@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/update_activity_shape"
+    android:background="@drawable/home_show_shape"
     android:padding="10dp">
 
     <TextView
+        android:paddingTop="10dp"
         android:id="@+id/tv_title_activity_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/write_tran3"
         android:gravity="center"
         android:text="@string/title_activity_update"
         android:textSize="16sp" />
@@ -18,9 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_title_activity_update"
+        android:paddingTop="20dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="10dp" />
+        android:textColor="@color/write_tran3" />
 
     <TextView
         android:id="@+id/tv_1_activity_update"
@@ -35,8 +38,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_body_activity_update"
         android:layout_toLeftOf="@id/tv_1_activity_update"
-        android:paddingTop="15dp"
-        android:textSize="11sp" />
+        android:paddingTop="20dp"
+        android:textColor="@color/write_tran2"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/tv_server_version_activity_update"
@@ -45,8 +49,9 @@
         android:layout_below="@id/tv_body_activity_update"
         android:layout_centerHorizontal="true"
         android:layout_toRightOf="@id/tv_1_activity_update"
-        android:paddingTop="15dp"
-        android:textSize="11sp" />
+        android:paddingTop="20dp"
+        android:textColor="@color/write_tran2"
+        android:textSize="12sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,7 +59,8 @@
         android:layout_below="@id/tv_server_version_activity_update"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:paddingTop="8dp">
+        android:paddingBottom="10dp"
+        android:paddingTop="12dp">
 
         <TextView
             android:id="@+id/tv_cancel_activity_update"
@@ -62,24 +68,24 @@
             android:textColor="@color/red"
             android:layout_height="wrap_content"
             android:text="@string/cancel_activity_update"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
 
         <TextView
-            android:paddingLeft="10dp"
+            android:paddingLeft="15dp"
             android:id="@+id/tv_download_activity_update"
             android:textColor="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/download_activity_update"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
 
         <TextView
-            android:paddingLeft="10dp"
-            android:textColor="@color/grey_blue"
+            android:paddingLeft="15dp"
+            android:textColor="@color/write_tran2"
             android:id="@+id/tv_cool_download_activity_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cool_download_activity_update"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
     </LinearLayout>
 </RelativeLayout>

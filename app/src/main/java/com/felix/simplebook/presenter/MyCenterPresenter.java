@@ -138,7 +138,7 @@ public class MyCenterPresenter implements IMyCenterPresenter {
             }else{
                 //load color
                 MyLog.info("no internet , load color...");
-                //centerView.showLocalUmg(R.color.colorPrimary);
+                centerView.showLocalUmg();
             }
             return;
 
@@ -152,7 +152,7 @@ public class MyCenterPresenter implements IMyCenterPresenter {
 
             @Override
             public void error(String value) {
-                centerView.showLocalUmg(R.color.colorPrimary);
+                centerView.showLocalUmg();
             }
         }, imgPath);
     }
